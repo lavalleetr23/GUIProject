@@ -9,7 +9,7 @@ public class Main {
 		Start.setSize(700,700);
 		Start.setVisible(true);
 		JPanel StartPanel = new JPanel();
-		StartPanel.setBackground(Color.GREEN);
+		StartPanel.setBackground(Color.lightGray);
 		StartPanel.setBounds(0,0,700,700);
 		StartPanel.setVisible(true);
 		Start.add(StartPanel);
