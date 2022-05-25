@@ -32,7 +32,7 @@ public class Main {
 		Play.setBounds(300, 550, 100, 50);
 		Play.setVisible(true);
 
-		//Adds Action Listener to the Play button, opens new panel when clicked
+		//Adds Action Listener to the Play button, opens new frame when clicked
 		Play.addActionListener(new ActionListener(){
 			 public void actionPerformed(ActionEvent e){  
 			           JFrame Game = new JFrame("BlockMan Adventures"); 

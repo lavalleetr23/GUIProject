@@ -15,6 +15,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	//Block movement variables
 	private int blockX = 320;
 	private int blockY = 540;
+	private int velx;
+	private int vely;
 
 	public void paint(Graphics g) {
 		//background
@@ -81,12 +83,14 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e) {
 		//Increments left each second or something
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			blockX = blockX - 10;
+			velx -=1;
+			new Timer(100,moveX).start();
 		}
 
 		//Increments right each second or something
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			blockX = blockX + 10;
+			velx +=1;
+			new Timer(100,moveX).start();
 		}
 
 		//These two if statements set the boundaries for how far left or right it can go
@@ -96,6 +100,14 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockX > 640){
 			blockX = 640;
 		}
+		
+		//Limits X velocity
+		if(velx>3) {
+			velx=3;
+		}
+		if(velx<-3) {
+			velx=-3;
+		}
 
 	}
 
@@ -104,4 +116,10 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void keyReleased(KeyEvent e) {
 
 	}
+	//Adjusts the X position according to the velocity
+	  ActionListener moveX = new ActionListener() {
+	      public void actionPerformed(ActionEvent evt) {
+	         blockX+=velx;
+	      }
+	  };
 }
