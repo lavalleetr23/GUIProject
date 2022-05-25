@@ -12,11 +12,19 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	private Timer timer;
 	private int delay = 8;
 
+
+	//Coin Bounce
+	private int coinY1 = 290;
+	private int coinY2 = 430;
+	private int coinDir = -1;
+
 	//Block movement variables
 	private int blockX = 320;
 	private int blockY = 540;
 	private int velx;
 	private int vely;
+	private boolean jumping = false;
+	private long airtime = 200;
 
 	public void paint(Graphics g) {
 		//background
@@ -54,7 +62,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 		//Coins
 		g.setColor(Color.yellow);
-		g.fillOval(120,290,50,50);
+		g.fillOval(120,coinY1,50,50);
 		g.fillOval(480,430,50,50);
 
 	}
@@ -69,6 +77,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
+
 		repaint();
 	}
 
@@ -93,20 +102,28 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			new Timer(100,moveX).start();
 		}
 
+		//Jumping
+		if (e.getKeyCode() == KeyEvent.VK_SPACE){
+			jumping = true;
+			new Thread(new thread()).start();
+		}
+
 		//These two if statements set the boundaries for how far left or right it can go
 		if (blockX < 10){
 			blockX = 10;
+			velx = 0;
 		}
 		if (blockX > 640){
 			blockX = 640;
+			velx = 0;
 		}
 		
 		//Limits X velocity
-		if(velx>3) {
-			velx=3;
+		if(velx>2) {
+			velx=2;
 		}
-		if(velx<-3) {
-			velx=-3;
+		if(velx<-2) {
+			velx=-2;
 		}
 
 	}
@@ -122,4 +139,16 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	         blockX+=velx;
 	      }
 	  };
+	public class thread implements Runnable{
+
+		@Override
+		public void run() {
+			try{
+				Thread.sleep(airtime);
+			}
+			catch (Exception e){
+
+			}
+		}
+	}
 }
