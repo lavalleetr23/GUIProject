@@ -10,12 +10,11 @@ import javax.swing.*;
 public class Level1Graphics extends Panel implements ActionListener, KeyListener {
 	//Timer stuff
 	private Timer timer;
-	private int delay = 8;
+	private int delay = 10;
 
 	//Block movement variables
 	private int blockX = 320;
 	private int blockY = 540;
-	private double velx;
 	private double vely;
 
 	public void paint(Graphics g) {
@@ -29,10 +28,12 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//BlockMan
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
+		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
 
 		//Door Platform
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(275,200,200,30);
+		Rectangle door = new Rectangle(275,200,200,30);
 
 		//Door
 		g.setColor(Color.black);
@@ -50,7 +51,9 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 		//Platforms
 		g.fillRect(40,350,200,30);
+		Rectangle p2 =new Rectangle(40,350,200,30);
 		g.fillRect(400,490,200,30);
+		Rectangle p1 =new Rectangle(400,490,200,30);
 
 		//Coins
 		g.setColor(Color.yellow);
@@ -83,16 +86,20 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e) {
 		//Increments left each second or something
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			velx -=.1;
-			new Timer(100,moveX).start();
-			new Timer(500,friction).start();
+			blockX-=10;
 		}
 
 		//Increments right each second or something
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			velx +=.1;
-			new Timer(100,moveX).start();
-			new Timer(500,friction).start();
+			blockX+=10;
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			if(blockY==540) {
+				vely=-10;
+				moveYTimer.start();
+				gravityTimer.start();
+			}
 		}
 
 		//These two if statements set the boundaries for how far left or right it can go
@@ -103,31 +110,31 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			blockX = 640;
 		}
 		
-		//Limits X velocity
-		if(velx>3) {
-			velx=3;
-		}
-		if(velx<-3) {
-			velx=-3;
-		}
-
 	}
-
 	//In the name ngl
 	@Override
 	public void keyReleased(KeyEvent e) {
 
 	}
-	//Adjusts the X position according to the velocity
-	  ActionListener moveX = new ActionListener() {
+	  //Adjusts the Y position according to the velocity
+	  ActionListener moveY = new ActionListener() {
 	      public void actionPerformed(ActionEvent evt) {
-	         blockX+=velx;
+	         blockY+=vely;
 	      }
 	  };
-	  
-	  ActionListener friction = new ActionListener() {
+	  //Gravity
+	  ActionListener gravity = new ActionListener() {
 		  public void actionPerformed(ActionEvent e) {
-			  velx*=0.9;
+			  if(blockY<540) {
+				  vely+=1;
+			  }else {
+				  vely=0;
+				  blockY = 540;
+				  moveYTimer.stop();
+				  gravityTimer.stop();
+			  }  
 		  }
 	  };
+		Timer moveYTimer = new Timer(10,moveY);
+		Timer gravityTimer = new Timer(50,gravity);
 }
