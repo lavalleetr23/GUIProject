@@ -16,7 +16,14 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	private int blockX = 320;
 	private int blockY = 540;
 	private double vely;
-
+	boolean onGround = true;
+	Rectangle door = new Rectangle(275,200,200,30);
+	Rectangle p1 =new Rectangle(400,490,200,30);
+	Rectangle p2 =new Rectangle(40,350,200,30);
+	public Rectangle blockManCreate() {
+		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
+		return blockMan;
+	}
 	public void paint(Graphics g) {
 		//background
 		setBackground(Color.CYAN);
@@ -28,12 +35,12 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//BlockMan
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
-		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
+
 
 		//Door Platform
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(275,200,200,30);
-		Rectangle door = new Rectangle(275,200,200,30);
+		
 
 		//Door
 		g.setColor(Color.black);
@@ -46,14 +53,12 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//Borders
 		g.fillRect(0,0,700,10);
 		g.fillRect(0,0,10,700);
-		g.fillRect(700,0,10,700);
-		g.fillRect(0,700,700,10);
+		g.fillRect(680,0,10,700);
+		g.fillRect(0,680,700,10);
 
 		//Platforms
 		g.fillRect(40,350,200,30);
-		Rectangle p2 =new Rectangle(40,350,200,30);
 		g.fillRect(400,490,200,30);
-		Rectangle p1 =new Rectangle(400,490,200,30);
 
 		//Coins
 		g.setColor(Color.yellow);
@@ -86,19 +91,28 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e) {
 		//Increments left each second or something
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			blockX-=10;
+				blockX-=10;
+				if(OnGroundTest()==false) {
+					moveYTimer.start();
+					gravityTimer.start();
+				}
 		}
 
 		//Increments right each second or something
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 			blockX+=10;
+			if(OnGroundTest()==false) {
+				moveYTimer.start();
+				gravityTimer.start();
+			}
 		}
 		
 		if(e.getKeyCode()==KeyEvent.VK_SPACE){
-			if(blockY==540) {
+			if(onGround) {
 				vely=-10;
 				moveYTimer.start();
 				gravityTimer.start();
+				onGround = false;
 			}
 		}
 
@@ -125,16 +139,26 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	  //Gravity
 	  ActionListener gravity = new ActionListener() {
 		  public void actionPerformed(ActionEvent e) {
-			  if(blockY<540) {
+			  if(blockY<540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
 				  vely+=1;
 			  }else {
 				  vely=0;
-				  blockY = 540;
 				  moveYTimer.stop();
 				  gravityTimer.stop();
+				  if(blockY>540) {
+					  blockY=540;
+				  }
+				  onGround = true;
 			  }  
 		  }
 	  };
-		Timer moveYTimer = new Timer(10,moveY);
-		Timer gravityTimer = new Timer(50,gravity);
+	public boolean OnGroundTest() {
+		if(!(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2)||blockY==540)) {
+			return false;
+		}else {
+			return true;
+		}
+	}	
+	  Timer moveYTimer = new Timer(10,moveY);
+	Timer gravityTimer = new Timer(50,gravity);
 }
