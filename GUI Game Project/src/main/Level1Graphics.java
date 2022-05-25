@@ -10,22 +10,20 @@ import javax.swing.*;
 public class Level1Graphics extends Panel implements ActionListener, KeyListener {
 	//Timer stuff
 	private Timer timer;
-	private int delay = 8;
-
-
-	//Coin Bounce
-	private int coinY1 = 290;
-	private int coinY2 = 430;
-	private int coinDir = -1;
+	private int delay = 10;
 
 	//Block movement variables
 	private int blockX = 320;
 	private int blockY = 540;
-	private int velx;
-	private int vely;
-	private boolean jumping = false;
-	private long airtime = 200;
-
+	private double vely;
+	boolean onGround = true;
+	Rectangle door = new Rectangle(275,200,200,30);
+	Rectangle p1 =new Rectangle(400,490,200,30);
+	Rectangle p2 =new Rectangle(40,350,200,30);
+	public Rectangle blockManCreate() {
+		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
+		return blockMan;
+	}
 	public void paint(Graphics g) {
 		//background
 		setBackground(Color.CYAN);
@@ -38,9 +36,11 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
 
+
 		//Door Platform
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(275,200,200,30);
+		
 
 		//Door
 		g.setColor(Color.black);
@@ -53,8 +53,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//Borders
 		g.fillRect(0,0,700,10);
 		g.fillRect(0,0,10,700);
-		g.fillRect(700,0,10,700);
-		g.fillRect(0,700,700,10);
+		g.fillRect(680,0,10,700);
+		g.fillRect(0,680,700,10);
 
 		//Platforms
 		g.fillRect(40,350,200,30);
@@ -62,7 +62,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 		//Coins
 		g.setColor(Color.yellow);
-		g.fillOval(120,coinY1,50,50);
+		g.fillOval(120,290,50,50);
 		g.fillOval(480,430,50,50);
 
 	}
@@ -77,7 +77,6 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
-
 		repaint();
 	}
 
@@ -92,63 +91,74 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e) {
 		//Increments left each second or something
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			velx -=1;
-			new Timer(100,moveX).start();
+				blockX-=10;
+				if(OnGroundTest()==false) {
+					moveYTimer.start();
+					gravityTimer.start();
+				}
 		}
 
 		//Increments right each second or something
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			velx +=1;
-			new Timer(100,moveX).start();
+			blockX+=10;
+			if(OnGroundTest()==false) {
+				moveYTimer.start();
+				gravityTimer.start();
+			}
 		}
-
-		//Jumping
-		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-			jumping = true;
-			new Thread(new thread()).start();
+		
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			if(onGround) {
+				vely=-10;
+				moveYTimer.start();
+				gravityTimer.start();
+				onGround = false;
+			}
 		}
 
 		//These two if statements set the boundaries for how far left or right it can go
 		if (blockX < 10){
 			blockX = 10;
-			velx = 0;
 		}
 		if (blockX > 640){
 			blockX = 640;
-			velx = 0;
 		}
 		
-		//Limits X velocity
-		if(velx>2) {
-			velx=2;
-		}
-		if(velx<-2) {
-			velx=-2;
-		}
-
 	}
-
 	//In the name ngl
 	@Override
 	public void keyReleased(KeyEvent e) {
 
 	}
-	//Adjusts the X position according to the velocity
-	  ActionListener moveX = new ActionListener() {
+	  //Adjusts the Y position according to the velocity
+	  ActionListener moveY = new ActionListener() {
 	      public void actionPerformed(ActionEvent evt) {
-	         blockX+=velx;
+	         blockY+=vely;
 	      }
 	  };
-	public class thread implements Runnable{
-
-		@Override
-		public void run() {
-			try{
-				Thread.sleep(airtime);
-			}
-			catch (Exception e){
-
-			}
+	  //Gravity
+	  ActionListener gravity = new ActionListener() {
+		  public void actionPerformed(ActionEvent e) {
+			  if(blockY<540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
+				  vely+=1;
+			  }else {
+				  vely=0;
+				  moveYTimer.stop();
+				  gravityTimer.stop();
+				  if(blockY>540) {
+					  blockY=540;
+				  }
+				  onGround = true;
+			  }  
+		  }
+	  };
+	public boolean OnGroundTest() {
+		if(!(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2)||blockY==540)) {
+			return false;
+		}else {
+			return true;
 		}
-	}
+	}	
+	  Timer moveYTimer = new Timer(10,moveY);
+	Timer gravityTimer = new Timer(50,gravity);
 }
