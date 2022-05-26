@@ -147,8 +147,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();	
-			if(velx>-5) {
-				velx-=1;
+			if(velx>-3) {
+				velx-=3;
 				moveXTimer.start();
 			}
 			if(!OnGroundTest()) {
@@ -162,8 +162,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();
-			if(velx<5) {
-				velx+=1;
+			if(velx<3) {
+				velx=3;
 				moveXTimer.start();
 			}
 			if(!OnGroundTest()) {
