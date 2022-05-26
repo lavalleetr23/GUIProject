@@ -41,6 +41,17 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		setBackground(Color.CYAN);
 
 
+
+
+		//Ground
+		g.setColor(Color.GREEN);
+		g.fillRect(0,600,700,440);
+
+		//Door
+		g.setColor(Color.black);
+		g.fillRect(325,120,100,80);
+		g.fillArc(325,100,100,40,180,-180);
+
 		//Coins
 		g.setColor(color);
 		g.fillOval(120,290,50,50);
@@ -48,25 +59,21 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.setColor(color2);
 		g.fillOval(480,430,50,50);
 
+		g.setColor(Color.yellow);
+		g.fillOval(-20,-20,140,140);
 
-		//Ground
-		g.setColor(Color.GREEN);
-		g.fillRect(0,600,700,440);
-
-		//BlockMan
-		g.setColor(Color.gray);
-		g.fillRect(blockX,blockY,60,60);
 
 
 		//Door Platform
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(275,200,200,30);
-		
 
-		//Door
-		g.setColor(Color.black);
-		g.fillRect(325,120,100,80);
-		g.fillArc(325,100,100,40,180,-180);
+
+
+		//BlockMan
+		g.setColor(Color.gray);
+		g.fillRect(blockX,blockY,60,60);
+
 
 
 		g.setColor(Color.lightGray);
@@ -81,7 +88,9 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(40,350,200,30);
 		g.fillRect(400,490,200,30);
 
+		//Directions
 
+		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 280, 500);
 
 	}
 	//Its what looks for key inputs
