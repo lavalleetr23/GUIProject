@@ -35,7 +35,7 @@ public class Main {
 		//Adds Action Listener to the Play button, opens new frame when clicked
 		Play.addActionListener(new ActionListener(){
 			 public void actionPerformed(ActionEvent e){  
-			           JFrame Level1 = new JFrame("BlockMan Adventures"); 
+			           JFrame Level1 = new JFrame("BlockMan Adventures Level 1"); 
 			           Level1.setSize(700,700);
 			           Level1.setVisible(true);
 			           Start.setVisible(false);

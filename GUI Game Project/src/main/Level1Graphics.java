@@ -23,7 +23,6 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	Color color = Color.yellow;
 	Color color2 = Color.yellow;
 	private int coinCount = 0;
-
 	boolean onGround = true;
 	Rectangle door = new Rectangle(275,200,200,30);
 	Rectangle p1 =new Rectangle(400,490,200,30);
@@ -122,6 +121,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
+	           JFrame Level2 = new JFrame("BlockMan Adventures Level 2"); 
+	           Level2.setSize(700,700);
+	           Level2.setVisible(true);
+	           this.setVisible(false);
+	           Level2Graphics L2 = new Level2Graphics();
+	           Level2.add(L2);
+	           L2.setLevel(2);
 		}
 
 		if (blockManCreate().intersects(p1)){
