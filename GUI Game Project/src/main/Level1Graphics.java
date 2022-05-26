@@ -30,6 +30,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	Rectangle p2 =new Rectangle(40,350,200,30);
 	Rectangle coin1 = new Rectangle(120,290,50,50);
 	Rectangle coin2 = new Rectangle(480,430,50,50);
+	Rectangle doorHit = new Rectangle(375,160,10,10);
 	public Rectangle blockManCreate() {
 		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
 		return blockMan;
@@ -70,10 +71,14 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 
 
+
+		//Hitbox for door
+		g.setColor(Color.black);
+		g.fillRect(365,160,10,10);
+
 		//BlockMan
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
-
 
 
 		g.setColor(Color.lightGray);
@@ -90,7 +95,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 		//Directions
 
-		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 280, 500);
+		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 40, 500);
 		
 		//Coin Counter
 		g.drawString("Coins " + coinCount,600,50);
@@ -98,6 +103,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	}
 	//Its what looks for key inputs
 	public Level1Graphics(){
+
 		addKeyListener(this);
 		timer = new Timer(delay,this);
 		timer.start();
@@ -114,6 +120,10 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockX > 620){
 			blockX = 620;
 		}
+		if (blockManCreate().intersects(doorHit)){
+			timer.stop();
+		}
+
 		if (blockManCreate().intersects(p1)){
 			if(blockY<=490) {
 				blockY = 430;
