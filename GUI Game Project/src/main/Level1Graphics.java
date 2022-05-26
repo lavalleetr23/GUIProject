@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.*;
 
 
@@ -16,17 +17,36 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	private int blockX = 320;
 	private int blockY = 540;
 	private double vely;
+
+	//Coin Stuff
+	Color color = Color.yellow;
+	Color color2 = Color.yellow;
+	private int coinCount = 0;
+
 	boolean onGround = true;
 	Rectangle door = new Rectangle(275,200,200,30);
 	Rectangle p1 =new Rectangle(400,490,200,30);
 	Rectangle p2 =new Rectangle(40,350,200,30);
+	Rectangle coin1 = new Rectangle(120,290,50,50);
+	Rectangle coin2 = new Rectangle(480,430,50,50);
 	public Rectangle blockManCreate() {
 		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
 		return blockMan;
 	}
+
+
 	public void paint(Graphics g) {
 		//background
 		setBackground(Color.CYAN);
+
+
+		//Coins
+		g.setColor(color);
+		g.fillOval(120,290,50,50);
+
+		g.setColor(color2);
+		g.fillOval(480,430,50,50);
+
 
 		//Ground
 		g.setColor(Color.GREEN);
@@ -60,10 +80,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(40,350,200,30);
 		g.fillRect(400,490,200,30);
 
-		//Coins
-		g.setColor(Color.yellow);
-		g.fillOval(120,290,50,50);
-		g.fillOval(480,430,50,50);
+
 
 	}
 	//Its what looks for key inputs
@@ -77,6 +94,42 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
+
+		if (blockX < 10){
+			blockX = 10;
+		}
+		if (blockX > 620){
+			blockX = 620;
+		}
+		if (blockManCreate().intersects(p1)){
+			blockY = 430;
+			vely = 0;
+			onGround = true;
+
+		}
+		if (blockManCreate().intersects(p2)){
+			blockY = 290;
+			vely = 0;
+			onGround = true;
+
+		}
+		if (blockManCreate().intersects(door)){
+			blockY = 140;
+			vely = 0;
+			onGround = true;
+
+		}
+		if (blockManCreate().intersects(coin1)){
+			color = Color.cyan;
+		}
+		if (blockManCreate().intersects(coin2)){
+			color2 = Color.cyan;
+		}
+
+
+
+
+
 		repaint();
 	}
 
@@ -92,7 +145,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//Increments left each second or something
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
 				blockX-=10;
-				if(OnGroundTest()==false) {
+				if(!OnGroundTest()) {
 					moveYTimer.start();
 					gravityTimer.start();
 				}
@@ -101,7 +154,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//Increments right each second or something
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 			blockX+=10;
-			if(OnGroundTest()==false) {
+			if(!OnGroundTest()) {
 				moveYTimer.start();
 				gravityTimer.start();
 			}
@@ -117,13 +170,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 
 		//These two if statements set the boundaries for how far left or right it can go
-		if (blockX < 10){
-			blockX = 10;
-		}
-		if (blockX > 640){
-			blockX = 640;
-		}
-		
+
 	}
 	//In the name ngl
 	@Override
@@ -153,12 +200,10 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		  }
 	  };
 	public boolean OnGroundTest() {
-		if(!(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2)||blockY==540)) {
-			return false;
-		}else {
-			return true;
-		}
+		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockY == 540;
 	}	
 	  Timer moveYTimer = new Timer(10,moveY);
 	Timer gravityTimer = new Timer(50,gravity);
+
+
 }

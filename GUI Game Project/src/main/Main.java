@@ -40,7 +40,9 @@ public class Main {
 			           Game.setVisible(true);
 			           Start.setVisible(false);
 			           Level1Graphics L1 = new Level1Graphics();
+
 			           Game.add(L1);
+
 			         }  
 		});
 
