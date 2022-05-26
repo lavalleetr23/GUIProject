@@ -91,6 +91,9 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//Directions
 
 		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 280, 500);
+		
+		//Coin Counter
+		g.drawString("Coins " + coinCount,600,50);
 
 	}
 	//Its what looks for key inputs
@@ -112,28 +115,47 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			blockX = 620;
 		}
 		if (blockManCreate().intersects(p1)){
-			blockY = 430;
-			vely = 0;
-			onGround = true;
-
+			if(blockY<=490) {
+				blockY = 430;
+				vely = 0;
+				onGround = true;
+			}else {
+				blockY+=Math.abs(blockY-460);
+				vely=-vely/2;
+			}
 		}
 		if (blockManCreate().intersects(p2)){
-			blockY = 290;
-			vely = 0;
-			onGround = true;
+			if(blockY<=350) {
+				blockY = 290;
+				vely = 0;
+				onGround = true;	
+			}else {
+				blockY+=blockY-210;
+				vely=-vely;
+			}
 
 		}
 		if (blockManCreate().intersects(door)){
+			if(blockY<=200) {
 			blockY = 140;
 			vely = 0;
 			onGround = true;
-
+			}else {
+				blockY+=blockY-170;
+				vely=-vely;
+			}
 		}
 		if (blockManCreate().intersects(coin1)){
+			if(color==Color.yellow) {
+			coinCount++;
 			color = Color.cyan;
+			}
 		}
 		if (blockManCreate().intersects(coin2)){
+			if(color2==Color.yellow) {
+			coinCount++;
 			color2 = Color.cyan;
+			}
 		}
 
 
