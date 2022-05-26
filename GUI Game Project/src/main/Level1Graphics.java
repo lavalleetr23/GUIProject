@@ -17,6 +17,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	private int blockX = 320;
 	private int blockY = 540;
 	private double vely;
+	private double velx;
 
 	//Coin Stuff
 	Color color = Color.yellow;
@@ -144,19 +145,31 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e) {
 		//Increments left each second or something
 		if (e.getKeyCode() == KeyEvent.VK_LEFT){
-				blockX-=10;
-				if(!OnGroundTest()) {
-					moveYTimer.start();
-					gravityTimer.start();
-				}
+			slowRightTimer.stop();
+			slowLeftTimer.stop();	
+			if(velx>-5) {
+				velx-=1;
+				moveXTimer.start();
+			}
+			if(!OnGroundTest()) {
+				moveYTimer.start();
+				gravityTimer.start();
+				onGround = false;
+			}
 		}
 
 		//Increments right each second or something
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-			blockX+=10;
+			slowRightTimer.stop();
+			slowLeftTimer.stop();
+			if(velx<5) {
+				velx+=1;
+				moveXTimer.start();
+			}
 			if(!OnGroundTest()) {
 				moveYTimer.start();
 				gravityTimer.start();
+				onGround = false;
 			}
 		}
 		
@@ -175,12 +188,23 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	//In the name ngl
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+			slowLeftTimer.start();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			slowRightTimer.start();
+		}
 	}
 	  //Adjusts the Y position according to the velocity
 	  ActionListener moveY = new ActionListener() {
 	      public void actionPerformed(ActionEvent evt) {
 	         blockY+=vely;
+	      }
+	  };
+	  //Adjusts the X position according to the velocity
+	  ActionListener moveX = new ActionListener() {
+	      public void actionPerformed(ActionEvent evt) {
+	         blockX+=velx;
 	      }
 	  };
 	  //Gravity
@@ -190,8 +214,12 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 				  vely+=1;
 			  }else {
 				  vely=0;
-				  moveYTimer.stop();
+				  velx=0;
 				  gravityTimer.stop();
+				  moveXTimer.stop();
+				  moveYTimer.stop();
+				  slowLeftTimer.stop();
+				  slowRightTimer.stop();
 				  if(blockY>540) {
 					  blockY=540;
 				  }
@@ -199,11 +227,30 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			  }  
 		  }
 	  };
+	  //Slows leftward movement
+	  ActionListener slowLeft = new ActionListener() {
+	      public void actionPerformed(ActionEvent evt) {
+	        if(velx<0) {
+	        	velx+=0.1;
+	        }
+	      }
+	  };
+	  //Slows rightward movement
+	  ActionListener slowRight = new ActionListener() {
+	      public void actionPerformed(ActionEvent evt) {
+	        if(velx>0) {
+	        	velx-=0.1;
+	        }
+	      }
+	  };
 	public boolean OnGroundTest() {
 		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockY == 540;
 	}	
-	  Timer moveYTimer = new Timer(10,moveY);
+	Timer moveYTimer = new Timer(10,moveY);
 	Timer gravityTimer = new Timer(50,gravity);
+	Timer moveXTimer = new Timer(10,moveX);
+	Timer slowLeftTimer = new Timer(50,slowLeft);
+	Timer slowRightTimer = new Timer(50,slowRight);
 
 
 }
