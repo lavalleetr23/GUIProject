@@ -41,10 +41,6 @@ public class Main {
 			           Start.setVisible(false);
 			           Level1Graphics L1 = new Level1Graphics();
 			           Level1.add(L1);
-					   if (L1.valid){
-						   Intermission inter = new Intermission();
-						   Level1.add(inter);
-					   }
 			         }  
 		});
 

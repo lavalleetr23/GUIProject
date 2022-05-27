@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class Intermission extends Panel implements ActionListener, KeyListener {
     public void paint(Graphics g){
-        g.clearRect(0,0,1000,1000);
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {

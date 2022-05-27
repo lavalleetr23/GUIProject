@@ -123,13 +123,15 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
-			JFrame intermission = new JFrame("Intermission");
-			intermission.setSize(700,700);
-			intermission.setVisible(true);
+			this.setVisible(false);
 			Intermission inter = new Intermission();
-			intermission.add(inter);
-
-
+			this.add(inter);
+			JPanel im = new JPanel();
+			JLabel win = new JLabel("You Win");
+			win.setBounds(300,300,100,50);
+			win.setVisible(true);
+			this.add(im);
+			im.add(win);
 		}
 
 		if (blockManCreate().intersects(p1)){
@@ -193,7 +195,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
 		//Increments left each second or something
-		if (e.getKeyCode() == KeyEvent.VK_LEFT){
+		if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();	
 			if(velx>-3) {
@@ -208,7 +210,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 
 		//Increments right each second or something
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();
 			if(velx<3) {
