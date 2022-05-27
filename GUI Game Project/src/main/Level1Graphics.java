@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.*;
 
 
@@ -108,6 +107,9 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		timer.start();
 	}
 
+
+
+
 	//This happens whenever a key or a sort of action is performed
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -121,13 +123,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
-	           JFrame Level2 = new JFrame("BlockMan Adventures Level 2"); 
-	           Level2.setSize(700,700);
-	           Level2.setVisible(true);
-	           this.setVisible(false);
-	           Level2Graphics L2 = new Level2Graphics();
-	           Level2.add(L2);
-	           L2.setLevel(2);
+			JFrame intermission = new JFrame("Intermission");
+			intermission.setSize(700,700);
+			intermission.setVisible(true);
+			Intermission inter = new Intermission();
+			intermission.add(inter);
+
+
 		}
 
 		if (blockManCreate().intersects(p1)){
