@@ -187,7 +187,9 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 
 
-		repaint(blockX,blockY,60,60);
+		repaint();
+
+
 	}
 
 	//This is for clicks
