@@ -101,7 +101,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 40, 500);
 		
 		//Coin Counter
-			g.drawString("Coins " + coinCount,600,50);
+		g.drawString("Coins " + coinCount,600,50);
 		
 	}
 	//Its what looks for key inputs
@@ -187,7 +187,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 
 
-		repaint();
+		repaint(blockX,blockY,60,60);
 	}
 
 	//This is for clicks
@@ -203,8 +203,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();	
-			if(velx>-3) {
-				velx-=3;
+			if(velx>-5) {
+				velx-=5;
 				moveXTimer.start();
 			}
 			if(!OnGroundTest()) {
@@ -218,8 +218,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();
-			if(velx<3) {
-				velx=3;
+			if(velx<5) {
+				velx=5;
 				moveXTimer.start();
 			}
 			if(!OnGroundTest()) {
