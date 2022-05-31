@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Level1Graphics extends Panel implements ActionListener, KeyListener {
 	//Timer stuff
 	private Timer timer;
-	private int delay = 10;
+	private int delay = 20;
 
 	//Block movement variables
 	private int blockX = 320;
@@ -22,6 +22,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	Color color = Color.yellow;
 	Color color2 = Color.yellow;
 	private int coinCount = 0;
+	
 	boolean onGround = true;
 	Rectangle door = new Rectangle(275,200,200,30);
 	Rectangle p1 =new Rectangle(400,490,200,30);
@@ -33,7 +34,6 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
 		return blockMan;
 	}
-
 
 	public void paint(Graphics g) {
 		//background
@@ -75,8 +75,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(365,160,10,10);
 
 		//BlockMan
+		if(blockY<=540) {
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
+		}else {
+			g.setColor(Color.gray);
+			g.fillRect(blockX,540,60,60);
+		}
 
 
 		g.setColor(Color.lightGray);
@@ -96,8 +101,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 40, 500);
 		
 		//Coin Counter
-		g.drawString("Coins " + coinCount,600,50);
-
+			g.drawString("Coins " + coinCount,600,50);
+		
 	}
 	//Its what looks for key inputs
 	public Level1Graphics(){
@@ -130,7 +135,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			JLabel win = new JLabel("You Win");
 			win.setBounds(300,300,100,50);
 			win.setVisible(true);
-			this.add(im);
+			this.add(win);
 			im.add(win);
 		}
 
@@ -140,7 +145,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 				vely = 0;
 				onGround = true;
 			}else {
-				blockY+=Math.abs(blockY-460);
+				blockY=520;
 				vely=-vely/2;
 			}
 		}
@@ -150,7 +155,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 				vely = 0;
 				onGround = true;	
 			}else {
-				blockY+=blockY-210;
+				blockY=380;
 				vely=-vely;
 			}
 
@@ -161,7 +166,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			vely = 0;
 			onGround = true;
 			}else {
-				blockY+=blockY-170;
+				blockY=230;
 				vely=-vely;
 			}
 		}
@@ -263,6 +268,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		  public void actionPerformed(ActionEvent e) {
 			  if(blockY<540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
 				  vely+=1;
+				  onGround = false;
 			  }else {
 				  vely=0;
 				  velx=0;
