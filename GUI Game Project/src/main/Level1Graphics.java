@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Level1Graphics extends Panel implements ActionListener, KeyListener {
 	//Timer stuff
 	private Timer timer;
-	private int delay = 20;
+	private int delay = 10;
 
 	//Block movement variables
 	private int blockX = 320;
@@ -75,7 +75,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(365,160,10,10);
 
 		//BlockMan
-		if(blockY<=540) {
+		if(blockY<=540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
 		}else {
@@ -138,15 +138,25 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			this.add(win);
 			im.add(win);
 		}
-
+		//Collisions
 		if (blockManCreate().intersects(p1)){
-			if(blockY<=490) {
+			if(blockX<=340&&blockY>490) {
+				blockX=340;
+				moveYTimer.start();
+			}else if(blockX<=600&&blockX>590&&blockY>490) {
+				blockX=600;
+				moveYTimer.start();
+			}else if(blockY<=490) {
 				blockY = 430;
 				vely = 0;
 				onGround = true;
 			}else {
-				blockY=520;
+				blockY=620;
+				moveYTimer.start();
+				gravityTimer.start();
 				vely=-vely/2;
+				onGround=false;
+				gravityTimer.start();
 			}
 		}
 		if (blockManCreate().intersects(p2)){
@@ -156,7 +166,11 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 				onGround = true;	
 			}else {
 				blockY=380;
+				moveYTimer.start();
+				gravityTimer.start();
 				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
 			}
 
 		}
@@ -167,7 +181,11 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			onGround = true;
 			}else {
 				blockY=230;
+				moveYTimer.start();
+				gravityTimer.start();
 				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
 			}
 		}
 		if (blockManCreate().intersects(coin1)){
@@ -242,10 +260,10 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	//In the name ngl
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+		if(e.getKeyCode()==KeyEvent.VK_LEFT||e.getKeyCode()==KeyEvent.VK_A) {
 			slowLeftTimer.start();
 		}
-		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT||e.getKeyCode()==KeyEvent.VK_D) {
 			slowRightTimer.start();
 		}
 	}
