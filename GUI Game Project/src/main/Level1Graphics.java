@@ -78,10 +78,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if(blockY<=540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
-		}else {
-			g.setColor(Color.gray);
-			g.fillRect(blockX,540,60,60);
-		}
+		}//else {
+			//while(!(blockY<=540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2)))) {
+			//	blockY--;
+			//}
+			//g.setColor(Color.gray);
+			//g.fillRect(blockX,blockY,60,60);
+		//}
 
 
 		g.setColor(Color.lightGray);
@@ -201,8 +204,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 			}
 		}
 
-		repaint(blockX,blockY,100,100);
-		repaint(blockX - 60, blockY - 60, 100, 100);
+		repaint();
 
 	}
 
@@ -219,8 +221,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();	
-			if(velx>-5) {
-				velx-=5;
+			if(velx>-3) {
+				velx-=3;
 				moveXTimer.start();
 			}
 			if(!OnGroundTest()) {
@@ -234,8 +236,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D){
 			slowRightTimer.stop();
 			slowLeftTimer.stop();
-			if(velx<5) {
-				velx=5;
+			if(velx<3) {
+				velx=3;
 				moveXTimer.start();
 			}
 			if(!OnGroundTest()) {
