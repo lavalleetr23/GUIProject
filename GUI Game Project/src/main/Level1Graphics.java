@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Level1Graphics extends Panel implements ActionListener, KeyListener {
 	//Timer stuff
 	private Timer timer;
-	private int delay = 10;
+	private int delay = 20;
 
 	//Block movement variables
 	private int blockX = 320;
@@ -75,16 +75,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(365,160,10,10);
 
 		//BlockMan
-		if(blockY<=540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
+		if(blockY<=540) {
 		g.setColor(Color.gray);
 		g.fillRect(blockX,blockY,60,60);
-		}//else {
-			//while(!(blockY<=540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2)))) {
-			//	blockY--;
-			//}
-			//g.setColor(Color.gray);
-			//g.fillRect(blockX,blockY,60,60);
-		//}
+		}else {
+			g.setColor(Color.gray);
+			g.fillRect(blockX,540,60,60);
+		}
 
 
 		g.setColor(Color.lightGray);
@@ -131,15 +128,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
-			this.setVisible(false);
-			Intermission inter = new Intermission();
-			this.add(inter);
-			JPanel im = new JPanel();
-			JLabel win = new JLabel("You Win");
-			win.setBounds(300,300,100,50);
-			win.setVisible(true);
-			this.add(win);
-			im.add(win);
+			Main cL1 = new Main();
+			cL1.Clear(true);
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
