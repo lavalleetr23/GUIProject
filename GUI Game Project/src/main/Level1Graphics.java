@@ -310,7 +310,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	  };
 	public boolean OnGroundTest() {
 		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockY == 540;
-	}	
+	}
 	Timer moveYTimer = new Timer(10,moveY);
 	Timer gravityTimer = new Timer(50,gravity);
 	Timer moveXTimer = new Timer(10,moveX);

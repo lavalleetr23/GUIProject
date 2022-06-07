@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class Main {
     static JFrame Level1 = new JFrame("BlockMan Adventures Level 1"); 
 	static JFrame Start = new JFrame("BlockMan Adventures Launcher");
+	static JFrame Level1Intermission = new JFrame();
 	public static void main(String[] args) {
 
 		//Sets starting frame
@@ -45,7 +46,6 @@ public class Main {
 	public void Clear(boolean clear) {
 		if(clear) {
 			Level1.setVisible(false);
-			JFrame Level1Intermission = new JFrame();
 			Level1Intermission.setSize(700,700);
 			Level1Intermission.setVisible(true);
 			JLabel Win = new JLabel("You Beat Level 1!");
@@ -68,6 +68,7 @@ public class Main {
         Level1.setSize(700,700);   
 		 	Level1.setVisible(true);
 	           Start.setVisible(false);
+	           Level1Intermission.setVisible(false);
 	           Level1Graphics L1 = new Level1Graphics();
 	           Level1.add(L1);
 	}
