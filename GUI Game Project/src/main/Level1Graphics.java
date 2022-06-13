@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -34,16 +38,18 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
 		return blockMan;
 	}
+	private BufferedImage image;
+
 
 	public void paint(Graphics g) {
 		//background
-		setBackground(Color.CYAN);
+		setBackground(Color.decode("#79c2f8"));
 
 
 
 
 		//Ground
-		g.setColor(Color.GREEN);
+		g.setColor(Color.decode("#69bc14"));
 		g.fillRect(0,600,700,440);
 
 		//Door
@@ -64,7 +70,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 
 		//Door Platform
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.decode("#2a5c10"));
 		g.fillRect(275,200,200,30);
 
 
@@ -77,7 +83,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//BlockMan
 		if(blockY<=540) {
 		g.setColor(Color.gray);
-		g.fillRect(blockX,blockY,60,60);
+		g.drawImage(image,blockX,blockY,this);
 		}else {
 			g.setColor(Color.gray);
 			g.fillRect(blockX,540,60,60);
@@ -94,11 +100,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(0,680,700,10);
 
 		//Platforms
+
 		g.fillRect(40,350,200,30);
 		g.fillRect(400,490,200,30);
 
 		//Directions
 
+		g.setColor(Color.black);
 		g.drawString("Press arrow keys to move left and right, and spacebar to jump", 40, 500);
 		
 		//Coin Counter
@@ -111,6 +119,12 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		addKeyListener(this);
 		timer = new Timer(delay,this);
 		timer.start();
+
+		try {
+			image = ImageIO.read(new File("GUI Game Project/BoxMan.png"));
+		} catch (IOException ex) {
+			// handle exception...
+		}
 	}
 
 
@@ -185,13 +199,13 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockManCreate().intersects(coin1)){
 			if(color==Color.yellow) {
 			coinCount++;
-			color = Color.cyan;
+			color = Color.decode("#79c2f8");
 			}
 		}
 		if (blockManCreate().intersects(coin2)){
 			if(color2==Color.yellow) {
 			coinCount++;
-			color2 = Color.cyan;
+			color2 = Color.decode("#79c2f8");
 			}
 		}
 

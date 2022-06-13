@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -39,9 +43,12 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     Rectangle coin2 = new Rectangle(580,550,50,50);
     Rectangle doorHit = new Rectangle();
 
+    private BufferedImage image;
+
+
     public void paint(Graphics g){
         //background
-        setBackground(Color.decode("#d2efff"));
+        setBackground(Color.decode("#79c2f8"));
 
         //Ground
         g.setColor(Color.darkGray);
@@ -93,7 +100,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         //BlockMan
 
         g.setColor(Color.gray);
-        g.fillRect(blockX,blockY,60,60);
+        g.drawImage(image,blockX,blockY,this);
 
         //Cloud Platforms
         g.setColor(Color.white);
@@ -138,6 +145,13 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         addKeyListener(this);
         timer = new Timer(delay,this);
         timer.start();
+
+        try {
+                image = ImageIO.read(new File("GUI Game Project/BoxMan.png"));
+        } catch (IOException ex) {
+                // handle exception...
+        }
+
     }
 
     //This happens whenever a key or a sort of action is performed
