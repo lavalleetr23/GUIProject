@@ -57,7 +57,7 @@ public class Main {
 	}
 	public void Level2Clear(boolean clear) {
 		if(clear) {
-			Level3.setSize(1000,700);
+			Level3.setSize(1000,800);
 			Level3.setVisible(true);
 			Level2.setVisible(false);
 			Level3Graphics L3 = new Level3Graphics();

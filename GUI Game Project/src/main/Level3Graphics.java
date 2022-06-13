@@ -15,7 +15,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
     //Block movement variables
     private int blockX = 25;
-    private int blockY = 60;
+    private int blockY = 160;
     private double vely;
     private double velx;
 
@@ -39,13 +39,26 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
     public void paint(Graphics g){
         //background
-        setBackground(Color.white);
+        setBackground(Color.decode("#d2efff"));
 
         //Ground
         g.setColor(Color.darkGray);
-        g.fillRect(0,100,200,700);
+        g.fillRect(0,220,370,700);
+        g.fillRect(370,220,100,40);
+        g.fillRect(350,240,100,40);
+        g.fillRect(330,260,100,40);
+        g.fillRect(310,280,100,40);
+        g.fillRect(290,300,100,40);
 
 
+        //Waterfall
+        g.setColor(Color.cyan);
+        g.fillRect(160,220,100,700);
+        g.setColor(Color.white);
+        g.fillOval(175,730,50,50);
+        g.fillOval(145,730,50,50);
+        g.fillOval(205,730,50,50);
+        g.fillOval(235,730,40,50);
 
 
 
@@ -59,13 +72,13 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
 
         //Door
-        g.setColor(Color.white);
-        g.fillRect(20,100,100,80);
-        g.fillArc(20,80,100,40,180,-180);
+        g.setColor(Color.black);
+        g.fillRect(900,100,100,80);
+        g.fillArc(900,80,100,40,180,-180);
 
         //Hitbox for door
         g.setColor(Color.white);
-        g.fillRect(40,160,10,10);
+        g.fillRect(940,160,10,10);
 
         //BlockMan
         if(blockY<=540) {
@@ -81,9 +94,9 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
         //Borders
         g.fillRect(0,0,1000,10);
-        g.fillRect(0,0,10,700);
-        g.fillRect(980,0,10,700);
-        g.fillRect(0,680,1000,10);
+        g.fillRect(0,0,10,800);
+        g.fillRect(980,0,10,800);
+        g.fillRect(0,780,1000,10);
 
 
 
