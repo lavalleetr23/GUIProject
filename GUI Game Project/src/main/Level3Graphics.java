@@ -43,7 +43,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     Rectangle coin2 = new Rectangle(580,550,50,50);
     Rectangle doorHit = new Rectangle();
 
-    private BufferedImage image;
+
 
 
     public void paint(Graphics g){
@@ -100,7 +100,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         //BlockMan
 
         g.setColor(Color.gray);
-        g.drawImage(image,blockX,blockY,this);
+        g.fillRect(blockX,blockY,60,60);;
 
         //Cloud Platforms
         g.setColor(Color.white);
@@ -146,11 +146,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         timer = new Timer(delay,this);
         timer.start();
 
-        try {
-                image = ImageIO.read(new File("GUI Game Project/BoxMan.png"));
-        } catch (IOException ex) {
-                // handle exception...
-        }
+
 
     }
 

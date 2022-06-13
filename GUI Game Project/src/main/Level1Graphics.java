@@ -38,18 +38,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
 		return blockMan;
 	}
-	private BufferedImage image;
 
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-		Graphics2D g2d = dimg.createGraphics();
-		g2d.drawImage(tmp, 0, 0, null);
-		g2d.dispose();
-
-		return dimg;
-	}
 	public void paint(Graphics g) {
 		//background
 		setBackground(Color.decode("#79c2f8"));
@@ -92,7 +81,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//BlockMan
 		if(blockY<=540) {
 		g.setColor(Color.gray);
-		g.drawImage(resize(image,60,60),blockX,blockY,this);
+		g.fillRect(blockX,blockY,60,60);
 		}else {
 			g.setColor(Color.gray);
 			g.fillRect(blockX,540,60,60);
@@ -129,11 +118,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		timer = new Timer(delay,this);
 		timer.start();
 
-		try {
-			image = ImageIO.read(new File("GUI Game Project/Blockman.jpg"));
-		} catch (IOException ex) {
-			// handle exception...
-		}
+
 	}
 
 
