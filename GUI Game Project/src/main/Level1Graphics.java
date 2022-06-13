@@ -40,7 +40,16 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	}
 	private BufferedImage image;
 
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+		Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+		BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
+		Graphics2D g2d = dimg.createGraphics();
+		g2d.drawImage(tmp, 0, 0, null);
+		g2d.dispose();
+
+		return dimg;
+	}
 	public void paint(Graphics g) {
 		//background
 		setBackground(Color.decode("#79c2f8"));
@@ -70,7 +79,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 
 		//Door Platform
-		g.setColor(Color.decode("#2a5c10"));
+		g.setColor(Color.lightGray);
 		g.fillRect(275,200,200,30);
 
 
@@ -83,7 +92,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//BlockMan
 		if(blockY<=540) {
 		g.setColor(Color.gray);
-		g.drawImage(image,blockX,blockY,this);
+		g.drawImage(resize(image,60,60),blockX,blockY,this);
 		}else {
 			g.setColor(Color.gray);
 			g.fillRect(blockX,540,60,60);
