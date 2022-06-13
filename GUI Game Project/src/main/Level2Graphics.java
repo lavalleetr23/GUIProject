@@ -35,13 +35,17 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	Rectangle p2 =new Rectangle(575,180,100,40);
 	Rectangle p3 =new Rectangle(375,180,100,40);
 	Rectangle g1 =new Rectangle(0,500,275,440);
-	Rectangle g2 =new Rectangle(375,500,200,440);
-	Rectangle g3 =new Rectangle(575,500,200,440);
+	Rectangle g2 =new Rectangle(375,500,100,440);
+	Rectangle g3 =new Rectangle(575,500,100,440);
 	Rectangle g4 =new Rectangle(775,500,225,440);
-	Rectangle ladder =new Rectangle(375,180,100,40);
-	Rectangle coin1 = new Rectangle(120,290,50,50);
-	Rectangle coin2 = new Rectangle(480,430,50,50);
+	Rectangle ladder =new Rectangle(840,220,70,280);
+	Rectangle coin1 = new Rectangle(300,80,50,50);
+	Rectangle coin2 = new Rectangle(500,330,50,50);
 	Rectangle doorHit = new Rectangle(20,100,100,80);
+	Rectangle lava1 = new Rectangle(275,520,100,80);
+	Rectangle lava2 = new Rectangle(475,520,100,80);
+	Rectangle lava3 = new Rectangle(675,520,100,80);
+	
 
 
 	public void paint(Graphics g){
@@ -120,7 +124,6 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 
 		//Coin Counter
 		g.drawString("Coins " + coinCount ,900,50);
-		g.drawString(blockX+", " + blockY, 800,50);
 
 	}
 	public Level2Graphics(){
@@ -140,24 +143,9 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
-			if(blockX<=715&&blockY>180) {
-				blockX=715;
-				moveYTimer.start();
-			}else if(blockX<=1000&&blockX>990&&blockY>180) {
-				blockX=1000;
-				moveYTimer.start();
-			}else if(blockY<=180) {
 				blockY = 120;
 				vely = 0;
 				onGround = true;
-			}else {
-				blockY=220;
-				moveYTimer.start();
-				gravityTimer.start();
-				vely=-vely/2;
-				onGround=false;
-				gravityTimer.start();
-			}
 		}
 		if (blockManCreate().intersects(p2)){
 			if(blockY<=180) {
@@ -266,14 +254,21 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		if (blockManCreate().intersects(coin1)){
 			if(color==Color.yellow) {
 				coinCount++;
-				color = Color.cyan;
+				color = Color.DARK_GRAY;
 			}
 		}
 		if (blockManCreate().intersects(coin2)){
 			if(color2==Color.yellow) {
 				coinCount++;
-				color2 = Color.cyan;
+				color2 = Color.DARK_GRAY;
 			}
+		}
+		if(blockManCreate().intersects(lava1)||blockManCreate().intersects(lava2)||blockManCreate().intersects(lava3)) {
+			blockX=25;
+			blockY=440;
+			coinCount=0;
+			color=Color.yellow;
+			color2=Color.yellow;
 		}
 
 		repaint();
@@ -327,7 +322,6 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 				onGround = false;
 			}
 		}
-
 		//These two if statements set the boundaries for how far left or right it can go
 
 	}
@@ -388,7 +382,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		}
 	};
 	public boolean OnGroundTest() {
-		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockManCreate().intersects(p3) || blockManCreate().intersects(g1) || blockManCreate().intersects(g2) || blockManCreate().intersects(g3) || blockManCreate().intersects(g4);
+		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockManCreate().intersects(p3) || blockManCreate().intersects(g1) || blockManCreate().intersects(g2) || blockManCreate().intersects(g3) || blockManCreate().intersects(g4) || blockManCreate().intersects(ladder);
 	}
 	Timer moveYTimer = new Timer(10,moveY);
 	Timer gravityTimer = new Timer(50,gravity);
