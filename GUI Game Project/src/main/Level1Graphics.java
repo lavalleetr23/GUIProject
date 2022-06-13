@@ -121,7 +121,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		timer.start();
 
 		try {
-			image = ImageIO.read(new File("GUI Game Project/BoxMan.png"));
+			image = ImageIO.read(new File("GUI Game Project/Blockman.jpg"));
 		} catch (IOException ex) {
 			// handle exception...
 		}
