@@ -16,8 +16,8 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     //Block movement variables
     private int blockX = 25;
     private int blockY = 160;
-    private double vely;
-    private double velx;
+    private double vely=0;
+    private double velx=0;
 
     //Coin Stuff
     Color color = Color.yellow;
@@ -30,11 +30,13 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     }
 
     boolean onGround = true;
-    Rectangle door = new Rectangle();
-    Rectangle p1 =new Rectangle(0,220,470,80);
-    Rectangle p2 =new Rectangle();
-    Rectangle coin1 = new Rectangle();
-    Rectangle coin2 = new Rectangle();
+    Rectangle plank = new Rectangle(0,680,520,30);
+    Rectangle p1 =new Rectangle(0,220,470,40);
+    Rectangle p2 =new Rectangle(850,220,400,40);
+    Rectangle cloud1 = new Rectangle(480,420,130,60);
+    Rectangle cloud2 = new Rectangle(680,650,130,60);
+    Rectangle coin1 = new Rectangle(900,80,50,50);
+    Rectangle coin2 = new Rectangle(580,550,50,50);
     Rectangle doorHit = new Rectangle();
 
     public void paint(Graphics g){
@@ -91,7 +93,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         //BlockMan
 
         g.setColor(Color.gray);
-        g.fillRect(blockX,160,60,60);
+        g.fillRect(blockX,blockY,60,60);
 
         //Cloud Platforms
         g.setColor(Color.white);
@@ -128,6 +130,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
         //Coin Counter
         g.drawString("Coins " + coinCount,900,50);
+        g.drawString(blockX+", "+blockY,800,50);
 
     }
     public Level3Graphics(){
@@ -155,7 +158,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         }
         //Collisions
         if (blockManCreate().intersects(p1)){
-            if(blockY<=220 && blockX < 471) {
+            if(blockY<=220) {
                 blockY = 160;
                 vely = 0;
                 onGround = true;
@@ -170,12 +173,12 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
         }
         if (blockManCreate().intersects(p2)){
-            if(blockY<=350) {
-                blockY = 290;
+            if(blockY<=220) {
+                blockY = 160;
                 vely = 0;
                 onGround = true;
             }else {
-                blockY=380;
+                blockY=250;
                 moveYTimer.start();
                 gravityTimer.start();
                 vely=-vely;
@@ -184,13 +187,41 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
             }
 
         }
-        if (blockManCreate().intersects(door)){
-            if(blockY<=200) {
-                blockY = 140;
+        if (blockManCreate().intersects(plank)){
+            if(blockY<=680) {
+                blockY = 620;
                 vely = 0;
                 onGround = true;
             }else {
-                blockY=230;
+                blockY=710;
+                moveYTimer.start();
+                gravityTimer.start();
+                vely=-vely;
+                onGround=false;
+                gravityTimer.start();
+            }
+        }
+        if (blockManCreate().intersects(cloud1)){
+            if(blockY<=420) {
+                blockY = 360;
+                vely = 0;
+                onGround = true;
+            }else {
+                blockY=450;
+                moveYTimer.start();
+                gravityTimer.start();
+                vely=-vely;
+                onGround=false;
+                gravityTimer.start();
+            }
+        }
+        if (blockManCreate().intersects(cloud1)){
+            if(blockY<=650) {
+                blockY = 620;
+                vely = 0;
+                onGround = true;
+            }else {
+                blockY=680;
                 moveYTimer.start();
                 gravityTimer.start();
                 vely=-vely;
@@ -201,13 +232,13 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         if (blockManCreate().intersects(coin1)){
             if(color==Color.yellow) {
                 coinCount++;
-                color = Color.cyan;
+                color = Color.decode("#d2efff");
             }
         }
         if (blockManCreate().intersects(coin2)){
             if(color2==Color.yellow) {
                 coinCount++;
-                color2 = Color.cyan;
+                color2 = Color.decode("#d2efff");
             }
         }
 
@@ -291,7 +322,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     //Gravity
     ActionListener gravity = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            if(blockY>220 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
+            if(!OnGroundTest()) {
                 vely+=1;
                 onGround = false;
             }else {
@@ -326,7 +357,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         }
     };
     public boolean OnGroundTest() {
-        return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockY == 540;
+        return blockManCreate().intersects(plank) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockManCreate().intersects(cloud1) || blockManCreate().intersects(cloud2);
     }
     Timer moveYTimer = new Timer(10,moveY);
     Timer gravityTimer = new Timer(50,gravity);
