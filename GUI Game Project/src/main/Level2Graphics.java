@@ -138,8 +138,8 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
-			Main cL1 = new Main();
-			cL1.Level1Clear(true);
+			Main cL2 = new Main();
+			cL2.Level2Clear(true);
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){

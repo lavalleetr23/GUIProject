@@ -43,12 +43,20 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
         //Ground
         g.setColor(Color.darkGray);
+        //Mountain Left
         g.fillRect(0,220,370,700);
         g.fillRect(370,220,100,40);
         g.fillRect(350,240,100,40);
         g.fillRect(330,260,100,40);
         g.fillRect(310,280,100,40);
         g.fillRect(290,300,100,40);
+        //Mountain Right
+        g.fillRect(850,220,400,700);
+        g.fillRect(700,220,160,40);
+        g.fillRect(770,240,100,40);
+        g.fillRect(790,260,100,40);
+        g.fillRect(810,280,100,40);
+        g.fillRect(830,300,100,40);
 
 
         //Waterfall
@@ -64,28 +72,48 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
         //Coins
         g.setColor(color);
-        g.fillOval(300,80,50,50);
+        g.fillOval(900,80,50,50);
 
         g.setColor(color2);
-        g.fillOval(500,330,50,50);
+        g.fillOval(580,550,50,50);
 
 
 
         //Door
         g.setColor(Color.black);
-        g.fillRect(900,100,100,80);
-        g.fillArc(900,80,100,40,180,-180);
+        g.fillRect(20,600,100,80);
+        g.fillArc(20,580,100,40,180,-180);
 
         //Hitbox for door
-        g.setColor(Color.white);
-        g.fillRect(940,160,10,10);
+        g.setColor(Color.black);
+        g.fillRect(40,640,10,10);
 
         //BlockMan
 
         g.setColor(Color.gray);
         g.fillRect(blockX,160,60,60);
 
+        //Cloud Platforms
+        g.setColor(Color.white);
 
+        //Top Cloud
+        g.fillOval(480,420,70,60);
+        g.fillOval(520,420,70,60);
+        g.fillOval(560,420,70,60);
+
+        //Bottom Cloud
+        g.fillOval(680,650,70,60);
+        g.fillOval(720,650,70,60);
+        g.fillOval(760,650,70,60);
+
+        //Wooden Platform
+        g.setColor(Color.decode("#634312"));
+        g.fillRect(0,680,520,30);
+        g.fillRect(460,240,5,450);
+        g.fillRect(40,240,5,450);
+        g.setColor(Color.decode("#b3b1b6"));
+        g.fillRect(35,230,15,20);
+        g.fillRect(455,230,15,20);
 
         g.setColor(Color.BLACK);
 

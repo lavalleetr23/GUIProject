@@ -84,9 +84,10 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 
 
-		g.setColor(Color.lightGray);
+
 
 		//Borders
+		g.setColor(Color.lightGray);
 		g.fillRect(0,0,700,10);
 		g.fillRect(0,0,10,700);
 		g.fillRect(680,0,10,700);
@@ -133,7 +134,9 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
-
+			timer.stop();
+			Main cL1 = new Main();
+			cL1.Level2Clear(true);
 			if(blockX<=340&&blockY>490) {
 				blockX=340;
 				moveYTimer.start();
