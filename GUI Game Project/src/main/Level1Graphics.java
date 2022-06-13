@@ -129,10 +129,11 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
 			Main cL1 = new Main();
-			cL1.Clear(true);
+			cL1.Level1Clear(true);
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
+
 			if(blockX<=340&&blockY>490) {
 				blockX=340;
 				moveYTimer.start();

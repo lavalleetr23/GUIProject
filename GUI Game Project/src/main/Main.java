@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 public class Main {
     static JFrame Level1 = new JFrame("BlockMan Adventures Level 1"); 
 	static JFrame Start = new JFrame("BlockMan Adventures Launcher");
-	static JFrame Level1Intermission = new JFrame();
+	static JFrame Level1Intermission = new JFrame("Intermission");
+	static JFrame Level2 = new JFrame("BlockMan Adventures Level 2");
+
 	public static void main(String[] args) {
 
 		//Sets starting frame
@@ -43,33 +45,22 @@ public class Main {
 
 
 	}
-	public void Clear(boolean clear) {
+	public void Level1Clear(boolean clear) {
 		if(clear) {
+			Level2.setSize(1000,700);
+			Level2.setVisible(true);
 			Level1.setVisible(false);
-			Level1Intermission.setSize(700,700);
-			Level1Intermission.setVisible(true);
-			JLabel Win = new JLabel("You Beat Level 1!");
-			Level1Intermission.add(Win);
-			Win.setBounds(250,50,200,100);
-			Win.setFont(new Font("Serif", Font.BOLD, 50));
-			Win.setVisible(true);
-			JButton Again = new JButton("Play Again");
-			Again.setBounds(200,500,100,100);
-			Level1Intermission.add(Again);
-			Again.setVisible(true);
-			Again.addActionListener(new ActionListener(){
-				 public void actionPerformed(ActionEvent e){  
-					 		L1Create();
-				         }  
-			});
+			Level2Graphics L2 = new Level2Graphics();
+			Level2.add(L2);
+
 		}
 	}
 	public static void L1Create() {
-        Level1.setSize(700,700);   
-		 	Level1.setVisible(true);
-	           Start.setVisible(false);
-	           Level1Intermission.setVisible(false);
-	           Level1Graphics L1 = new Level1Graphics();
-	           Level1.add(L1);
+        Level1.setSize(700,700);
+		Level1.setVisible(true);
+		Start.setVisible(false);
+		Level1Intermission.setVisible(false);
+		Level1Graphics L1 = new Level1Graphics();
+		Level1.add(L1);
 	}
 }
