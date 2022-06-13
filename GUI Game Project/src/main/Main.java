@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
-    static JFrame Level1 = new JFrame("BlockMan Adventures Level 1"); 
 	static JFrame Start = new JFrame("BlockMan Adventures Launcher");
-	static JFrame Level1Intermission = new JFrame("Intermission");
+    static JFrame Level1 = new JFrame("BlockMan Adventures Level 1");
 	static JFrame Level2 = new JFrame("BlockMan Adventures Level 2");
+	static JFrame Level3 = new JFrame("BlockMan Adventures Level 2");
 
 	public static void main(String[] args) {
 
@@ -55,11 +55,20 @@ public class Main {
 
 		}
 	}
+	public void Level2Clear(boolean clear) {
+		if(clear) {
+			Level3.setSize(1000,700);
+			Level3.setVisible(true);
+			Level2.setVisible(false);
+			Level3Graphics L3 = new Level3Graphics();
+			Level3.add(L3);
+
+		}
+	}
 	public static void L1Create() {
         Level1.setSize(700,700);
 		Level1.setVisible(true);
 		Start.setVisible(false);
-		Level1Intermission.setVisible(false);
 		Level1Graphics L1 = new Level1Graphics();
 		Level1.add(L1);
 	}
