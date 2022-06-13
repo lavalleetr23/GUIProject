@@ -15,7 +15,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 
 	//Block movement variables
 	private int blockX = 25;
-	private int blockY = 680;
+	private int blockY = 440;
 	private double vely;
 	private double velx;
 
@@ -30,12 +30,18 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	}
 
 	boolean onGround = true;
-	Rectangle door = new Rectangle(275,200,200,30);
-	Rectangle p1 =new Rectangle(400,490,200,30);
-	Rectangle p2 =new Rectangle(40,350,200,30);
+	Rectangle door = new Rectangle(0,180,275,40);
+	Rectangle p1 =new Rectangle(775,180,225,40);
+	Rectangle p2 =new Rectangle(575,180,100,40);
+	Rectangle p3 =new Rectangle(375,180,100,40);
+	Rectangle g1 =new Rectangle(0,500,275,440);
+	Rectangle g2 =new Rectangle(375,500,200,440);
+	Rectangle g3 =new Rectangle(575,500,200,440);
+	Rectangle g4 =new Rectangle(775,500,225,440);
+	Rectangle ladder =new Rectangle(375,180,100,40);
 	Rectangle coin1 = new Rectangle(120,290,50,50);
 	Rectangle coin2 = new Rectangle(480,430,50,50);
-	Rectangle doorHit = new Rectangle(375,160,10,10);
+	Rectangle doorHit = new Rectangle(20,100,100,80);
 
 
 	public void paint(Graphics g){
@@ -98,14 +104,8 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		g.fillRect(40,160,10,10);
 
 		//BlockMan
-		if(blockY<=540) {
-			g.setColor(Color.gray);
-			g.fillRect(blockX,blockY,60,60);
-		}else {
-			g.setColor(Color.gray);
-			g.fillRect(blockX,440,60,60);
-		}
-
+		g.setColor(Color.gray);
+		g.fillRect(blockX,blockY,60,60);
 
 		g.setColor(Color.BLACK);
 
@@ -119,7 +119,8 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 
 
 		//Coin Counter
-		g.drawString("Coins " + coinCount,900,50);
+		g.drawString("Coins " + coinCount ,900,50);
+		g.drawString(blockX+", " + blockY, 800,50);
 
 	}
 
@@ -127,13 +128,6 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
-
-		if (blockX < 10){
-			blockX = 10;
-		}
-		if (blockX > 620){
-			blockX = 620;
-		}
 		if (blockManCreate().intersects(doorHit)){
 			timer.stop();
 			Main cL1 = new Main();
@@ -141,20 +135,18 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
-			Main cl = new Main();
-			cl.Level2Clear(true);
-			if(blockX<=340&&blockY>490) {
-				blockX=340;
+			if(blockX<=715&&blockY>180) {
+				blockX=715;
 				moveYTimer.start();
-			}else if(blockX<=600&&blockX>590&&blockY>490) {
-				blockX=600;
+			}else if(blockX<=1000&&blockX>990&&blockY>180) {
+				blockX=1000;
 				moveYTimer.start();
-			}else if(blockY<=490) {
-				blockY = 430;
+			}else if(blockY<=180) {
+				blockY = 120;
 				vely = 0;
 				onGround = true;
 			}else {
-				blockY=620;
+				blockY=220;
 				moveYTimer.start();
 				gravityTimer.start();
 				vely=-vely/2;
@@ -163,12 +155,87 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 			}
 		}
 		if (blockManCreate().intersects(p2)){
-			if(blockY<=350) {
-				blockY = 290;
+			if(blockY<=180) {
+				blockY = 120;
 				vely = 0;
 				onGround = true;
 			}else {
-				blockY=380;
+				blockY=220;
+				moveYTimer.start();
+				gravityTimer.start();
+				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
+			}
+
+		}
+		if (blockManCreate().intersects(p3)){
+			if(blockY<=180) {
+				blockY = 120;
+				vely = 0;
+				onGround = true;
+			}else {
+				blockY=220;
+				moveYTimer.start();
+				gravityTimer.start();
+				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
+			}
+
+		}
+		if (blockManCreate().intersects(g1)){
+			if(blockY<=500) {
+				blockY = 440;
+				vely = 0;
+				onGround = true;
+			}else {
+				blockY=940;
+				moveYTimer.start();
+				gravityTimer.start();
+				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
+			}
+
+		}
+		if (blockManCreate().intersects(g2)){
+			if(blockY<=500) {
+				blockY = 440;
+				vely = 0;
+				onGround = true;
+			}else {
+				blockY=940;
+				moveYTimer.start();
+				gravityTimer.start();
+				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
+			}
+
+		}
+		if (blockManCreate().intersects(g3)){
+			if(blockY<=500) {
+				blockY = 440;
+				vely = 0;
+				onGround = true;
+			}else {
+				blockY=940;
+				moveYTimer.start();
+				gravityTimer.start();
+				vely=-vely;
+				onGround=false;
+				gravityTimer.start();
+			}
+
+		}
+		if (blockManCreate().intersects(g4)){
+			if(blockY<=500) {
+				blockY = 440;
+				vely = 0;
+				onGround = true;
+			}else {
+				blockY=940;
 				moveYTimer.start();
 				gravityTimer.start();
 				vely=-vely;
@@ -178,12 +245,12 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 
 		}
 		if (blockManCreate().intersects(door)){
-			if(blockY<=200) {
-				blockY = 140;
+			if(blockY<=180) {
+				blockY = 120;
 				vely = 0;
 				onGround = true;
 			}else {
-				blockY=230;
+				blockY=220;
 				moveYTimer.start();
 				gravityTimer.start();
 				vely=-vely;
@@ -284,7 +351,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	//Gravity
 	ActionListener gravity = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(blockY<540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
+			if(!OnGroundTest()) {
 				vely+=1;
 				onGround = false;
 			}else {
@@ -295,9 +362,6 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 				moveYTimer.stop();
 				slowLeftTimer.stop();
 				slowRightTimer.stop();
-				if(blockY>540) {
-					blockY=540;
-				}
 				onGround = true;
 			}
 		}
@@ -319,7 +383,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		}
 	};
 	public boolean OnGroundTest() {
-		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockY == 540;
+		return blockManCreate().intersects(door) || blockManCreate().intersects(p1) || blockManCreate().intersects(p2) || blockManCreate().intersects(p3) || blockManCreate().intersects(g1) || blockManCreate().intersects(g2) || blockManCreate().intersects(g3) || blockManCreate().intersects(g4);
 	}
 	Timer moveYTimer = new Timer(10,moveY);
 	Timer gravityTimer = new Timer(50,gravity);
