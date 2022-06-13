@@ -81,7 +81,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         g.fillRect(940,160,10,10);
 
         //BlockMan
-        if(blockY<=540) {
+        if(blockY<=160 && blockX <= 470) {
             g.setColor(Color.gray);
             g.fillRect(blockX,blockY,60,60);
         }else {
@@ -105,6 +105,12 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         g.drawString("Coins " + coinCount,900,50);
 
     }
+    public Level3Graphics(){
+
+        addKeyListener(this);
+        timer = new Timer(delay,this);
+        timer.start();
+    }
 
     //This happens whenever a key or a sort of action is performed
     @Override
@@ -114,8 +120,8 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         if (blockX < 10){
             blockX = 10;
         }
-        if (blockX > 620){
-            blockX = 620;
+        if (blockX > 990){
+            blockX = 990;
         }
         if (blockManCreate().intersects(doorHit)){
             timer.stop();

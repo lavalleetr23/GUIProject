@@ -123,7 +123,12 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		g.drawString(blockX+", " + blockY, 800,50);
 
 	}
+	public Level2Graphics(){
 
+		addKeyListener(this);
+		timer = new Timer(delay,this);
+		timer.start();
+	}
 	//This happens whenever a key or a sort of action is performed
 	@Override
 	public void actionPerformed(ActionEvent e) {

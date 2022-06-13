@@ -8,7 +8,7 @@ public class Main {
 	static JFrame Start = new JFrame("BlockMan Adventures Launcher");
     static JFrame Level1 = new JFrame("BlockMan Adventures Level 1");
 	static JFrame Level2 = new JFrame("BlockMan Adventures Level 2");
-	static JFrame Level3 = new JFrame("BlockMan Adventures Level 2");
+	static JFrame Level3 = new JFrame("BlockMan Adventures Level 3");
 
 	public static void main(String[] args) {
 
@@ -49,7 +49,7 @@ public class Main {
 		if(clear) {
 			Level2.setSize(1000,700);
 			Level2.setVisible(true);
-			Level1.setVisible(false);
+			Level1.dispose();
 			Level2Graphics L2 = new Level2Graphics();
 			Level2.add(L2);
 
@@ -59,7 +59,7 @@ public class Main {
 		if(clear) {
 			Level3.setSize(1000,800);
 			Level3.setVisible(true);
-			Level2.setVisible(false);
+			Level2.dispose();
 			Level3Graphics L3 = new Level3Graphics();
 			Level3.add(L3);
 
