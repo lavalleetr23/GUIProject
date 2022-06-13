@@ -30,12 +30,12 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     }
 
     boolean onGround = true;
-    Rectangle door = new Rectangle(275,200,200,30);
-    Rectangle p1 =new Rectangle(400,490,200,30);
-    Rectangle p2 =new Rectangle(40,350,200,30);
-    Rectangle coin1 = new Rectangle(120,290,50,50);
-    Rectangle coin2 = new Rectangle(480,430,50,50);
-    Rectangle doorHit = new Rectangle(375,160,10,10);
+    Rectangle door = new Rectangle();
+    Rectangle p1 =new Rectangle(0,220,470,80);
+    Rectangle p2 =new Rectangle();
+    Rectangle coin1 = new Rectangle();
+    Rectangle coin2 = new Rectangle();
+    Rectangle doorHit = new Rectangle();
 
     public void paint(Graphics g){
         //background
@@ -81,13 +81,10 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         g.fillRect(940,160,10,10);
 
         //BlockMan
-        if(blockY<=160 && blockX <= 470) {
-            g.setColor(Color.gray);
-            g.fillRect(blockX,blockY,60,60);
-        }else {
-            g.setColor(Color.gray);
-            g.fillRect(blockX,440,60,60);
-        }
+
+        g.setColor(Color.gray);
+        g.fillRect(blockX,160,60,60);
+
 
 
         g.setColor(Color.BLACK);
@@ -130,26 +127,19 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         }
         //Collisions
         if (blockManCreate().intersects(p1)){
-            Main cl = new Main();
-            cl.Level2Clear(true);
-            if(blockX<=340&&blockY>490) {
-                blockX=340;
-                moveYTimer.start();
-            }else if(blockX<=600&&blockX>590&&blockY>490) {
-                blockX=600;
-                moveYTimer.start();
-            }else if(blockY<=490) {
-                blockY = 430;
+            if(blockY<=220 && blockX < 471) {
+                blockY = 160;
                 vely = 0;
                 onGround = true;
             }else {
-                blockY=620;
+                blockY=250;
                 moveYTimer.start();
                 gravityTimer.start();
-                vely=-vely/2;
+                vely=-vely;
                 onGround=false;
                 gravityTimer.start();
             }
+
         }
         if (blockManCreate().intersects(p2)){
             if(blockY<=350) {
@@ -273,7 +263,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     //Gravity
     ActionListener gravity = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            if(blockY<540 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
+            if(blockY>220 && !(blockManCreate().intersects(door)||blockManCreate().intersects(p1)||blockManCreate().intersects(p2))) {
                 vely+=1;
                 onGround = false;
             }else {

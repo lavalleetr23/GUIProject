@@ -41,7 +41,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	Rectangle ladder =new Rectangle(840,220,70,280);
 	Rectangle coin1 = new Rectangle(300,80,50,50);
 	Rectangle coin2 = new Rectangle(500,330,50,50);
-	Rectangle doorHit = new Rectangle(20,100,100,80);
+	Rectangle doorHit = new Rectangle(20,100,20,80);
 	Rectangle lava1 = new Rectangle(275,520,100,80);
 	Rectangle lava2 = new Rectangle(475,520,100,80);
 	Rectangle lava3 = new Rectangle(675,520,100,80);

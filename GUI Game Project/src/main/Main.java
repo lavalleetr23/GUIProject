@@ -49,7 +49,7 @@ public class Main {
 		if(clear) {
 			Level2.setSize(1000,700);
 			Level2.setVisible(true);
-			Level1.dispose();
+			Level1.setVisible(false);
 			Level2Graphics L2 = new Level2Graphics();
 			Level2.add(L2);
 
@@ -59,7 +59,7 @@ public class Main {
 		if(clear) {
 			Level3.setSize(1000,800);
 			Level3.setVisible(true);
-			Level2.dispose();
+			Level2.setVisible(false);
 			Level3Graphics L3 = new Level3Graphics();
 			Level3.add(L3);
 
