@@ -136,7 +136,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
-		if (blockManCreate().intersects(doorHit)){
+		if (blockManCreate().intersects(doorHit) && coinCount == 2){
 			timer.stop();
 			Main cL2 = new Main();
 			cL2.Level2Clear(true);

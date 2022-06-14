@@ -135,7 +135,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockX > 620){
 			blockX = 620;
 		}
-		if (blockManCreate().intersects(doorHit)){
+		if (blockManCreate().intersects(doorHit) && coinCount == 2){
 			timer.stop();
 			Main cL1 = new Main();
 			cL1.Level1Clear(true);

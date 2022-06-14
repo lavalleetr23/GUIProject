@@ -173,6 +173,8 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         cloudPuff5X = cloudPuff5X + cloud2Dir;
         cloudPuff6X = cloudPuff6X + cloud2Dir;
 
+        cloud1.setLocation(cloud1X,420);
+        cloud2.setLocation(cloud2X,650);
         if (cloudPuff3X > 770 || cloudPuff1X < 370){
             cloud1Dir*=-1;
         }
@@ -236,6 +238,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
             }
         }
         if (blockManCreate().intersects(cloud1)){
+            blockX+=cloud1Dir;
             if(blockY<=420) {
                 blockY = 370;
                 vely = 0;
@@ -250,6 +253,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
             }
         }
         if (blockManCreate().intersects(cloud2)){
+            blockX+=cloud2Dir;
             if(blockY<=650) {
                 blockY = 600;
                 vely = 0;
