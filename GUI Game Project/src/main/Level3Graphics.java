@@ -49,9 +49,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     Rectangle cloud2 = new Rectangle(cloud2X,650,130,60);
     Rectangle coin1 = new Rectangle(900,80,50,50);
     Rectangle coin2 = new Rectangle(580,550,50,50);
-    Rectangle doorHit = new Rectangle();
-
-
+    Rectangle doorHit = new Rectangle(40,640,10,10);
 
 
     public void paint(Graphics g){
@@ -278,6 +276,11 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
                 coinCount++;
                 color2 = Color.decode("#79c2f8");
             }
+        }
+        if (blockManCreate().intersects(doorHit)&&coinCount==2){
+			timer.stop();
+			Main cL3 = new Main();
+			cL3.Level3Clear(true);
         }
         if(blockY>700) {
         	blockX=25;

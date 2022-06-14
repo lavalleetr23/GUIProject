@@ -9,6 +9,7 @@ public class Main {
     static JFrame Level1 = new JFrame("BlockMan Adventures Level 1");
 	static JFrame Level2 = new JFrame("BlockMan Adventures Level 2");
 	static JFrame Level3 = new JFrame("BlockMan Adventures Level 3");
+	static JFrame BossBattle = new JFrame("BlockMan Adventures Boss Battle");
 
 	public static void main(String[] args) {
 
@@ -62,6 +63,16 @@ public class Main {
 			Level2.setVisible(false);
 			Level3Graphics L3 = new Level3Graphics();
 			Level3.add(L3);
+
+		}
+	}
+	public void Level3Clear(boolean clear) {
+		if(clear) {
+			BossBattle.setSize(1000,800);
+			BossBattle.setVisible(true);
+			Level3.setVisible(false);
+			BossBattle BB = new BossBattle();
+			BossBattle.add(BB);
 
 		}
 	}
