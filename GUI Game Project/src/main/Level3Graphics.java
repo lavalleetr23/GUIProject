@@ -4,11 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -16,6 +11,19 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     //Timer stuff
     private Timer timer;
     private int delay = 20;
+
+    //Clouds
+    private int cloud1X = 480;
+    private int cloud2X = 680;
+    private int cloud1Dir = -4;
+    private int cloud2Dir = -4;
+    private int cloudPuff1X = 480;
+    private int cloudPuff2X = 520;
+    private int cloudPuff3X = 560;
+    private int cloudPuff4X = 680;
+    private int cloudPuff5X = 720;
+    private int cloudPuff6X = 760;
+
 
     //Block movement variables
     private int blockX = 25;
@@ -37,8 +45,8 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     Rectangle plank = new Rectangle(0,680,520,30);
     Rectangle p1 =new Rectangle(0,220,470,40);
     Rectangle p2 =new Rectangle(700,220,400,40);
-    Rectangle cloud1 = new Rectangle(480,420,130,60);
-    Rectangle cloud2 = new Rectangle(680,650,130,60);
+    Rectangle cloud1 = new Rectangle(cloud1X,420,130,60);
+    Rectangle cloud2 = new Rectangle(cloud2X,650,130,60);
     Rectangle coin1 = new Rectangle(900,80,50,50);
     Rectangle coin2 = new Rectangle(580,550,50,50);
     Rectangle doorHit = new Rectangle();
@@ -106,14 +114,14 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         g.setColor(Color.white);
 
         //Top Cloud
-        g.fillOval(480,420,70,60);
-        g.fillOval(520,420,70,60);
-        g.fillOval(560,420,70,60);
+        g.fillOval(cloudPuff1X,420,70,60);
+        g.fillOval(cloudPuff2X,420,70,60);
+        g.fillOval(cloudPuff3X,420,70,60);
 
         //Bottom Cloud
-        g.fillOval(680,650,70,60);
-        g.fillOval(720,650,70,60);
-        g.fillOval(760,650,70,60);
+        g.fillOval(cloudPuff4X,650,70,60);
+        g.fillOval(cloudPuff5X,650,70,60);
+        g.fillOval(cloudPuff6X,650,70,60);
 
         //Wooden Platform
         g.setColor(Color.decode("#634312"));
@@ -150,11 +158,27 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
     }
 
+
     //This happens whenever a key or a sort of action is performed
     @Override
     public void actionPerformed(ActionEvent e) {
         //Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
 
+        cloud1X = cloud1X + cloud1Dir;
+        cloud2X = cloud2X + cloud2Dir;
+        cloudPuff1X = cloudPuff1X + cloud1Dir;
+        cloudPuff2X = cloudPuff2X + cloud1Dir;
+        cloudPuff3X = cloudPuff3X + cloud1Dir;
+        cloudPuff4X = cloudPuff4X + cloud2Dir;
+        cloudPuff5X = cloudPuff5X + cloud2Dir;
+        cloudPuff6X = cloudPuff6X + cloud2Dir;
+
+        if (cloudPuff3X > 770 || cloudPuff1X < 370){
+            cloud1Dir*=-1;
+        }
+        if (cloudPuff6X > 770 || cloudPuff4X < 370){
+            cloud2Dir*=-1;
+        }
         if (blockX < 10){
             blockX = 10;
         }
