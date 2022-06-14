@@ -36,7 +36,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     boolean onGround = true;
     Rectangle plank = new Rectangle(0,680,520,30);
     Rectangle p1 =new Rectangle(0,220,470,40);
-    Rectangle p2 =new Rectangle(850,220,400,40);
+    Rectangle p2 =new Rectangle(700,220,400,40);
     Rectangle cloud1 = new Rectangle(480,420,130,60);
     Rectangle cloud2 = new Rectangle(680,650,130,60);
     Rectangle coin1 = new Rectangle(900,80,50,50);
@@ -173,7 +173,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
                 vely = 0;
                 onGround = true;
             }else {
-                blockY=250;
+                blockY=260;
                 moveYTimer.start();
                 gravityTimer.start();
                 vely=-vely;
@@ -188,7 +188,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
                 vely = 0;
                 onGround = true;
             }else {
-                blockY=250;
+                blockY=260;
                 moveYTimer.start();
                 gravityTimer.start();
                 vely=-vely;
@@ -213,7 +213,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         }
         if (blockManCreate().intersects(cloud1)){
             if(blockY<=420) {
-                blockY = 360;
+                blockY = 370;
                 vely = 0;
                 onGround = true;
             }else {
@@ -225,9 +225,9 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
                 gravityTimer.start();
             }
         }
-        if (blockManCreate().intersects(cloud1)){
+        if (blockManCreate().intersects(cloud2)){
             if(blockY<=650) {
-                blockY = 620;
+                blockY = 600;
                 vely = 0;
                 onGround = true;
             }else {
@@ -242,16 +242,22 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         if (blockManCreate().intersects(coin1)){
             if(color==Color.yellow) {
                 coinCount++;
-                color = Color.decode("#d2efff");
+                color = Color.decode("#79c2f8");
             }
         }
         if (blockManCreate().intersects(coin2)){
             if(color2==Color.yellow) {
                 coinCount++;
-                color2 = Color.decode("#d2efff");
+                color2 = Color.decode("#79c2f8");
             }
         }
-
+        if(blockY>700) {
+        	blockX=25;
+        	blockY=160;
+        	coinCount=0;
+			color=Color.yellow;
+			color2=Color.yellow;
+        }
         repaint();
 
     }
@@ -343,9 +349,6 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
                 moveYTimer.stop();
                 slowLeftTimer.stop();
                 slowRightTimer.stop();
-                if(blockY>540) {
-                    blockY=540;
-                }
                 onGround = true;
             }
         }
