@@ -44,7 +44,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     boolean onGround = true;
     Rectangle plank = new Rectangle(0,680,520,30);
     Rectangle p1 =new Rectangle(0,220,470,40);
-    Rectangle p2 =new Rectangle(700,220,400,40);
+    Rectangle p2 =new Rectangle(650,220,400,40);
     Rectangle cloud1 = new Rectangle(cloud1X,420,130,60);
     Rectangle cloud2 = new Rectangle(cloud2X,650,130,60);
     Rectangle coin1 = new Rectangle(900,80,50,50);
@@ -67,7 +67,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         g.fillRect(290,300,100,40);
         //Mountain Right
         g.fillRect(850,220,400,700);
-        g.fillRect(700,220,160,40);
+        g.fillRect(650,220,160,40);
         g.fillRect(770,240,100,40);
         g.fillRect(790,260,100,40);
         g.fillRect(810,280,100,40);

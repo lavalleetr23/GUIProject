@@ -193,7 +193,6 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
-			timer.stop();
 			if(blockX<=340&&blockY>490) {
 				blockX=340;
 				moveYTimer.start();
@@ -210,7 +209,6 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 				gravityTimer.start();
 				vely=-vely/2;
 				onGround=false;
-				gravityTimer.start();
 			}
 		}
 		if (blockManCreate().intersects(p2)){
@@ -245,7 +243,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockManCreate().intersects(coin1)){
 			if(color==Color.yellow) {
 			coinCount++;
-			color = Color.decode("#79c2f8");
+			color = Color.gray;
 			}
 		}
 		if (blockManCreate().intersects(coin2)){

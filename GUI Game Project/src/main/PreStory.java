@@ -216,6 +216,7 @@ public class PreStory extends Panel implements ActionListener, KeyListener{
         if (blockX > 1020){
             Main cl1 = new Main();
             cl1.L1Create();
+            timer.stop();
         }
 
 
