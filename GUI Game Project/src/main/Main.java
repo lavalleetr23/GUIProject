@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 public class Main {
 	static JFrame Start = new JFrame("BlockMan Adventures Launcher");
+	static JFrame PreStory = new JFrame("PreStory");
     static JFrame Level1 = new JFrame("BlockMan Adventures Level 1");
 	static JFrame Level2 = new JFrame("BlockMan Adventures Level 2");
 	static JFrame Level3 = new JFrame("BlockMan Adventures Level 3");
@@ -40,7 +41,7 @@ public class Main {
 		//Adds Action Listener to the Play button, opens new frame when clicked
 		Play.addActionListener(new ActionListener(){
 			 public void actionPerformed(ActionEvent e){  
-				 		L1Create();
+				 		StartClear(true);
 			         }  
 		});
 
@@ -75,6 +76,16 @@ public class Main {
 			BossBattle.add(BB);
 
 		}
+	}
+	public static void StartClear(boolean clear) {
+		if (clear) {
+			PreStory.setSize(1000, 800);
+			PreStory.setVisible(true);
+			Start.setVisible(false);
+			PreStory BB = new PreStory();
+			PreStory.add(BB);
+		}
+
 	}
 	public static void L1Create() {
         Level1.setSize(700,700);
