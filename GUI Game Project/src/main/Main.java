@@ -41,7 +41,7 @@ public class Main {
 		//Adds Action Listener to the Play button, opens new frame when clicked
 		Play.addActionListener(new ActionListener(){
 			 public void actionPerformed(ActionEvent e){  
-				 		StartClear(true);
+				 		L1Create();
 			         }  
 		});
 
@@ -77,20 +77,11 @@ public class Main {
 
 		}
 	}
-	public static void StartClear(boolean clear) {
-		if (clear) {
-			PreStory.setSize(1000, 800);
-			PreStory.setVisible(true);
-			Start.setVisible(false);
-			PreStory BB = new PreStory();
-			PreStory.add(BB);
-		}
 
-	}
-	public void L1Create() {
+	public static void L1Create() {
         Level1.setSize(700,700);
 		Level1.setVisible(true);
-		PreStory.setVisible(false);
+		Start.setVisible(false);
 		Level1Graphics L1 = new Level1Graphics();
 		Level1.add(L1);
 	}

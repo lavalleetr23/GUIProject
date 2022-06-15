@@ -357,7 +357,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 			color2=Color.yellow;
 		}
 
-		repaint(blockX-20,blockY-20,100,100);
+		repaint();
 
 	}
 
