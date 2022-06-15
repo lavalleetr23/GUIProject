@@ -142,7 +142,6 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
 
         //Coin Counter
         g.drawString("Coins " + coinCount,900,50);
-        g.drawString(blockX+", "+blockY,800,50);
 
     }
     public Level3Graphics(){
