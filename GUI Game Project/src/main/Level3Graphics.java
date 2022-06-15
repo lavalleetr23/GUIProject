@@ -68,10 +68,10 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         //Mountain Right
         g.fillRect(850,220,400,700);
         g.fillRect(650,220,160,40);
-        g.fillRect(770,240,100,40);
-        g.fillRect(790,260,100,40);
-        g.fillRect(810,280,100,40);
-        g.fillRect(830,300,100,40);
+        g.fillRect(770,240,200,40);
+        g.fillRect(790,260,200,40);
+        g.fillRect(810,280,200,40);
+        g.fillRect(830,300,200,40);
 
 
         //Waterfall
@@ -192,7 +192,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         if (blockManCreate().intersects(doorHit)){
             timer.stop();
             Main cL1 = new Main();
-            cL1.Level1Clear(true);
+            cL1.Level3Clear(true);
         }
         //Collisions
         if (blockManCreate().intersects(p1)){
@@ -281,11 +281,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
                 color2 = Color.decode("#79c2f8");
             }
         }
-        if (blockManCreate().intersects(doorHit)&&coinCount==2){
-			timer.stop();
-			Main cL3 = new Main();
-			cL3.Level3Clear(true);
-        }
+
         if(blockY>700) {
         	blockX=25;
         	blockY=160;

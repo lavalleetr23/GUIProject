@@ -259,13 +259,13 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		if (blockManCreate().intersects(coin1)){
 			if(color==Color.yellow) {
 				coinCount++;
-				color = Color.DARK_GRAY;
+				color = Color.decode("#343434");
 			}
 		}
 		if (blockManCreate().intersects(coin2)){
 			if(color2==Color.yellow) {
 				coinCount++;
-				color2 = Color.DARK_GRAY;
+				color2 = Color.decode("#343434");
 			}
 		}
 		if(blockY > 600) {
