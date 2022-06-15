@@ -179,6 +179,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		}
 		//Collisions
 		if (blockManCreate().intersects(p1)){
+
 			if(blockX<=340&&blockY>490) {
 				blockX=340;
 				moveYTimer.start();

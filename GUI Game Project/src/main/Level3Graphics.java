@@ -37,8 +37,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     private int coinCount = 0;
 
     public Rectangle blockManCreate() {
-        Rectangle blockMan = new Rectangle(blockX,blockY,60,60);
-        return blockMan;
+        return new Rectangle(blockX,blockY,60,60);
     }
 
     boolean onGround = true;

@@ -157,6 +157,7 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 			}else {
 				g.drawString("You Lost!",300,500);
 			}
+			timer.stop();
 		}
 	}	
     public BossBattle(){
@@ -311,9 +312,9 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 		}
 		if(bpvis){
 			if(phase==1) {
-				bpX-=10;
-			}else if(phase==2) {
 				bpX-=20;
+			}else if(phase==2) {
+				bpX-=30;
 			}
 		}
 		if(bp.intersects(blockManCreate())) {
