@@ -26,7 +26,18 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	Color color = Color.yellow;
 	Color color2 = Color.yellow;
 	private int coinCount = 0;
-	
+
+	//Clouds
+
+	private int cloud1Dir = -2;
+	private int cloud2Dir = -2;
+	private int cloudPuff1X = 480;
+	private int cloudPuff2X = 520;
+	private int cloudPuff3X = 560;
+	private int cloudPuff4X = 680;
+	private int cloudPuff5X = 720;
+	private int cloudPuff6X = 760;
+
 	boolean onGround = true;
 	Rectangle door = new Rectangle(275,200,200,30);
 	Rectangle p1 =new Rectangle(400,490,200,30);
@@ -40,15 +51,38 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	}
 
 	public void paint(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
 		//background
 		setBackground(Color.decode("#79c2f8"));
 
+		g.setColor(Color.darkGray);
+		int[] xpoints = {275,0,550};
+		int[] ypoints = {300,700,700};
+		g2.fillPolygon(xpoints,ypoints,3);
+		int[] x2points = {100,-100,300};
+		int[] y2points = {330,700,700};
+		g.setColor(Color.GRAY);
+		g2.fillPolygon(x2points,y2points,3);
+		int[] x3points = {550,300,800};
+		int[] y3points = {300,700,700};
+		g2.fillPolygon(x3points,y3points,3);
 
+		g.setColor(Color.white);
+		//Top Cloud
+		g.fillOval(cloudPuff1X,150,70,60);
+		g.fillOval(cloudPuff2X,150,70,60);
+		g.fillOval(cloudPuff3X,150,70,60);
 
+		//Bottom Cloud
+		g.fillOval(cloudPuff4X,300,70,60);
+		g.fillOval(cloudPuff5X,300,70,60);
+		g.fillOval(cloudPuff6X,300,70,60);
 
 		//Ground
 		g.setColor(Color.decode("#69bc14"));
-		g.fillRect(0,600,700,440);
+		g.fill3DRect(0,600,700,440,true);
+		g.setColor(Color.decode("#a65d11"));
+		g.fillRect(0,640,700,440);
 
 		//Door
 		g.setColor(Color.black);
@@ -69,7 +103,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 		//Door Platform
 		g.setColor(Color.lightGray);
-		g.fillRect(275,200,200,30);
+		g.fill3DRect(275,200,200,30,true);
 
 
 
@@ -81,10 +115,10 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		//BlockMan
 		if(blockY<=540) {
 		g.setColor(Color.gray);
-		g.fillRect(blockX,blockY,60,60);
+		g.fill3DRect(blockX,blockY,60,60,true);
 		}else {
 			g.setColor(Color.gray);
-			g.fillRect(blockX,540,60,60);
+			g.fill3DRect(blockX,540,60,60,true);
 		}
 
 
@@ -99,8 +133,8 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 
 		//Platforms
 
-		g.fillRect(40,350,200,30);
-		g.fillRect(400,490,200,30);
+		g.fill3DRect(40,350,200,30, true);
+		g.fill3DRect(400,490,200,30,true);
 
 		//Directions
 
@@ -129,11 +163,28 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
 
+		cloudPuff1X = cloudPuff1X + cloud1Dir;
+		cloudPuff2X = cloudPuff2X + cloud1Dir;
+		cloudPuff3X = cloudPuff3X + cloud1Dir;
+		cloudPuff4X = cloudPuff4X + cloud2Dir;
+		cloudPuff5X = cloudPuff5X + cloud2Dir;
+		cloudPuff6X = cloudPuff6X + cloud2Dir;
+
 		if (blockX < 10){
 			blockX = 10;
 		}
 		if (blockX > 620){
 			blockX = 620;
+		}
+		if (cloudPuff3X == -60){
+			cloudPuff1X= 710;
+			cloudPuff2X = 750;
+			cloudPuff3X = 780;
+		}
+		if (cloudPuff6X == -60){
+			cloudPuff4X= 710;
+			cloudPuff5X = 750;
+			cloudPuff6X = 780;
 		}
 		if (blockManCreate().intersects(doorHit) && coinCount == 2){
 			timer.stop();
@@ -144,7 +195,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockManCreate().intersects(p1)){
 			timer.stop();
 			Main cL1 = new Main();
-			cL1.Level2Clear(true);
+			cL1.Level1Clear(true);
 			if(blockX<=340&&blockY>490) {
 				blockX=340;
 				moveYTimer.start();

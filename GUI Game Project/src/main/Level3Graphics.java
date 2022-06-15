@@ -161,6 +161,10 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
     @Override
     public void actionPerformed(ActionEvent e) {
         //Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
+        if(!OnGroundTest()){
+            moveYTimer.start();
+            gravityTimer.start();
+        }
 
         cloud1X = cloud1X + cloud1Dir;
         cloud2X = cloud2X + cloud2Dir;

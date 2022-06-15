@@ -19,6 +19,10 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	private double vely;
 	private double velx;
 
+	//Lava movement
+	private int lavadir = -2;
+	private int lava1x = 200;
+
 	//Coin Stuff
 	Color color = Color.yellow;
 	Color color2 = Color.yellow;
@@ -42,51 +46,109 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	Rectangle coin1 = new Rectangle(300,80,50,50);
 	Rectangle coin2 = new Rectangle(500,330,50,50);
 	Rectangle doorHit = new Rectangle(20,100,20,80);
-	Rectangle lava1 = new Rectangle(275,520,100,80);
-	Rectangle lava2 = new Rectangle(475,520,100,80);
-	Rectangle lava3 = new Rectangle(675,520,100,80);
-	
+
+
 
 
 	public void paint(Graphics g){
 		//background
-		setBackground(Color.DARK_GRAY);
+		setBackground(Color.decode("#343434"));
+		g.setColor(Color.decode("#3c3a3a"));
+		g.fill3DRect(20,20,100,40,true);
+		g.fill3DRect(140,20,100,40,true);
+		g.fill3DRect(260,20,100,40,true);
+		g.fill3DRect(380,20,100,40,true);
+		g.fill3DRect(500,20,100,40,true);
+		g.fill3DRect(620,20,100,40,true);
+		g.fill3DRect(740,20,100,40,true);
+		g.fill3DRect(860,20,100,40,true);
+		g.fill3DRect(980,20,100,40,true);
+		g.fill3DRect(20,80,100,40,true);
+		g.fill3DRect(140,80,100,40,true);
+		g.fill3DRect(260,80,100,40,true);
+		g.fill3DRect(380,80,100,40,true);
+		g.fill3DRect(500,80,100,40,true);
+		g.fill3DRect(620,80,100,40,true);
+		g.fill3DRect(740,80,100,40,true);
+		g.fill3DRect(860,80,100,40,true);
+		g.fill3DRect(980,80,100,40,true);
+		g.fill3DRect(20,140,100,40,true);
+		g.fill3DRect(140,140,100,40,true);
+		g.fill3DRect(260,140,100,40,true);
+		g.fill3DRect(380,140,100,40,true);
+		g.fill3DRect(500,140,100,40,true);
+		g.fill3DRect(620,140,100,40,true);
+		g.fill3DRect(740,140,100,40,true);
+		g.fill3DRect(860,140,100,40,true);
+		g.fill3DRect(980,140,100,40,true);
+		g.fill3DRect(20,200,100,40,true);
+		g.fill3DRect(140,200,100,40,true);
+		g.fill3DRect(260,200,100,40,true);
+		g.fill3DRect(380,200,100,40,true);
+		g.fill3DRect(500,200,100,40,true);
+		g.fill3DRect(620,200,100,40,true);
+		g.fill3DRect(740,200,100,40,true);
+		g.fill3DRect(860,200,100,40,true);
+		g.fill3DRect(980,200,100,40,true);
+		g.fill3DRect(20,260,100,40,true);
+		g.fill3DRect(140,260,100,40,true);
+		g.fill3DRect(260,260,100,40,true);
+		g.fill3DRect(380,260,100,40,true);
+		g.fill3DRect(500,260,100,40,true);
+		g.fill3DRect(620,260,100,40,true);
+		g.fill3DRect(740,260,100,40,true);
+		g.fill3DRect(860,260,100,40,true);
+		g.fill3DRect(980,260,100,40,true);
+		g.fill3DRect(20,320,100,40,true);
+		g.fill3DRect(140,320,100,40,true);
+		g.fill3DRect(260,320,100,40,true);
+		g.fill3DRect(380,320,100,40,true);
+		g.fill3DRect(500,320,100,40,true);
+		g.fill3DRect(620,320,100,40,true);
+		g.fill3DRect(740,320,100,40,true);
+		g.fill3DRect(860,320,100,40,true);
+		g.fill3DRect(980,320,100,40,true);
+		g.fill3DRect(20,380,100,40,true);
+		g.fill3DRect(140,380,100,40,true);
+		g.fill3DRect(260,380,100,40,true);
+		g.fill3DRect(380,380,100,40,true);
+		g.fill3DRect(500,380,100,40,true);
+		g.fill3DRect(620,380,100,40,true);
+		g.fill3DRect(740,380,100,40,true);
+		g.fill3DRect(860,380,100,40,true);
+		g.fill3DRect(980,380,100,40,true);
+		g.fill3DRect(20,440,100,40,true);
+		g.fill3DRect(140,440,100,40,true);
+		g.fill3DRect(260,440,100,40,true);
+		g.fill3DRect(380,440,100,40,true);
+		g.fill3DRect(500,440,100,40,true);
+		g.fill3DRect(620,440,100,40,true);
+		g.fill3DRect(740,440,100,40,true);
+		g.fill3DRect(860,440,100,40,true);
+		g.fill3DRect(980,440,100,40,true);
+		g.fill3DRect(20,500,100,40,true);
+		g.fill3DRect(140,500,100,40,true);
+		g.fill3DRect(260,500,100,40,true);
+		g.fill3DRect(380,500,100,40,true);
+		g.fill3DRect(500,500,100,40,true);
+		g.fill3DRect(620,500,100,40,true);
+		g.fill3DRect(740,500,100,40,true);
+		g.fill3DRect(860,500,100,40,true);
+		g.fill3DRect(980,500,100,40,true);
 
-		//Ground
-		g.setColor(Color.BLACK);
-		g.fillRect(0,500,1000,440);
-
-		//Holes
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(275,500,100,100);
-		g.fillRect(475,500,100,100);
-		g.fillRect(675,500,100,100);
-
-		//Lava
-		g.setColor(Color.red);
-		g.fillRect(275,520,100,80);
-		g.fillRect(475,520,100,80);
-		g.fillRect(675,520,100,80);
-
-		//Platforms
-		g.setColor(Color.black);
-		g.fillRect(0,180,275,40);
-		g.fillRect(375,180,100,40);
-		g.fillRect(575,180,100,40);
-		g.fillRect(775,180,225,40);
 
 		//Ladder
 		g.setColor(Color.white);
-		g.fillRect(840,220,10,280);
-		g.fillRect(900,220,10,280);
-		g.fillRect(840,240,60,10);
-		g.fillRect(840,280,60,10);
-		g.fillRect(840,320,60,10);
-		g.fillRect(840,360,60,10);
-		g.fillRect(840,400,60,10);
-		g.fillRect(840,440,60,10);
-		g.fillRect(840,480,60,10);
 
+		g.fill3DRect(840,240,60,10,true);
+		g.fill3DRect(840,280,60,10,true);
+		g.fill3DRect(840,320,60,10,true);
+		g.fill3DRect(840,360,60,10,true);
+		g.fill3DRect(840,400,60,10,true);
+		g.fill3DRect(840,440,60,10,true);
+		g.fill3DRect(840,480,60,10,true);
+		g.fill3DRect(840,220,10,280,true);
+		g.fill3DRect(900,220,10,280,true);
 
 
 		//Coins
@@ -95,8 +157,6 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 
 		g.setColor(color2);
 		g.fillOval(500,330,50,50);
-
-
 
 		//Door
 		g.setColor(Color.white);
@@ -109,7 +169,27 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 
 		//BlockMan
 		g.setColor(Color.gray);
-		g.fillRect(blockX,blockY,60,60);
+		g.fill3DRect(blockX,blockY,60,60,true);
+
+		//Lava
+		g.setColor(Color.red);
+		g.fillRect(200,580,650,440);
+		g.fillOval(lava1x,550,650,60);
+
+		//Ground
+		g.setColor(Color.BLACK);
+		g.fill3DRect(0,500,275,440,false);
+		g.fill3DRect(375,470,100,40,false);
+		g.fill3DRect(575,470,100,40,false);
+		g.fill3DRect(775,500,400,440,false);
+
+
+		//Platforms
+		g.setColor(Color.black);
+		g.fillRect(0,180,275,40);
+		g.fillRect(375,180,100,40);
+		g.fillRect(575,180,100,40);
+		g.fillRect(775,180,225,40);
 
 		g.setColor(Color.BLACK);
 
@@ -135,6 +215,12 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	//This happens whenever a key or a sort of action is performed
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		lava1x+=lavadir;
+
+
+		if (lava1x <= 150 || lava1x >= 250){
+			lavadir*=-1;
+		}
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
 		if (blockManCreate().intersects(doorHit) && coinCount == 2){
 			timer.stop();
@@ -263,7 +349,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 				color2 = Color.DARK_GRAY;
 			}
 		}
-		if(blockManCreate().intersects(lava1)||blockManCreate().intersects(lava2)||blockManCreate().intersects(lava3)) {
+		if(blockY > 600) {
 			blockX=25;
 			blockY=440;
 			coinCount=0;
