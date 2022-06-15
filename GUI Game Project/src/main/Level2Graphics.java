@@ -20,7 +20,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	private double velx;
 
 	//Lava movement
-	private int lavadir = -2;
+	private int lavadir = -3;
 	private int lava1x = 200;
 
 	//Coin Stuff
@@ -39,8 +39,8 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 	Rectangle p2 =new Rectangle(575,180,100,40);
 	Rectangle p3 =new Rectangle(375,180,100,40);
 	Rectangle g1 =new Rectangle(0,500,275,440);
-	Rectangle g2 =new Rectangle(375,500,100,440);
-	Rectangle g3 =new Rectangle(575,500,100,440);
+	Rectangle g2 =new Rectangle(375,470,100,440);
+	Rectangle g3 =new Rectangle(575,470,100,440);
 	Rectangle g4 =new Rectangle(775,500,225,440);
 	Rectangle ladder =new Rectangle(840,220,70,280);
 	Rectangle coin1 = new Rectangle(300,80,50,50);
@@ -199,7 +199,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		}
 		if (blockManCreate().intersects(g2)){
 			if(blockY<=500) {
-				blockY = 440;
+				blockY = 410;
 				vely = 0;
 				onGround = true;
 			}else {
@@ -214,7 +214,7 @@ public class Level2Graphics extends Panel implements ActionListener, KeyListener
 		}
 		if (blockManCreate().intersects(g3)){
 			if(blockY<=500) {
-				blockY = 440;
+				blockY = 410;
 				vely = 0;
 				onGround = true;
 			}else {

@@ -117,6 +117,13 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 		//BlockMan
 		g.setColor(Color.gray);
 		g.fill3DRect(blockX,blockY,60,60,true);
+		//Jetpack
+		g.setColor(Color.black);
+		g.fill3DRect(blockX-10,blockY+15,10,30,true);
+		if(jetpackuse) {
+			g.setColor(Color.orange);
+			g.fillRect(blockX-10,blockY+45,8,10);
+		}
 		//Boss
 		g.setColor(Color.decode("#ff00e6"));
 		g.fill3DRect(800,100,200,500,true);
@@ -143,12 +150,12 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 			g.fill3DRect(bpX,bpY,40,40,true);
 		}
 		if(gameover) {
-			g.setColor(Color.gray);
-			g.fill3DRect(400,250,200,200,true);
+			g.setColor(Color.black);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 100)); 
 			if(win){
-				g.drawString("You Win! play again? (y or n)",300,500);
+				g.drawString("You Win!",300,500);
 			}else {
-				g.drawString("You Lost! try again? (y or n)",300,500);
+				g.drawString("You Lost!",300,500);
 			}
 		}
 	}	
@@ -225,21 +232,6 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
                 }
               
         }
-        if(e.getKeyCode()==KeyEvent.VK_Y) {
-        	if(gameover) {
-        		Main go = new Main();
-        		if(win) {
-        			go.L1Create();
-        		}else {
-        			go.Level3Clear(true);
-        		}
-        	}
-        }
-        if(e.getKeyCode()==KeyEvent.VK_N) {
-        	if(gameover) {
-        		Main go = new Main();
-        	}
-        }
 
         //These two if statements set the boundaries for how far left or right it can go
 
@@ -267,6 +259,7 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 		}
 		if(blockY<100) {
 			blockY=100;
+			vely=0;
 		}
 		if(blockX<0) {
 			blockX=0;
@@ -289,21 +282,21 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 		}
 		if(p1.intersects(Boss)) {
 			if(p1vis) {
-				bossHealth-=100;
+				bossHealth-=50;
 				p1vis =false;
 				ammo+=1;
 			}
 		}
 		if(p2.intersects(Boss)) {
 			if(p2vis) {
-				bossHealth-=100;
+				bossHealth-=50;
 				p2vis =false;
 				ammo+=1;
 			}
 		}
 		if(p3.intersects(Boss)) {
 			if(p3vis) {
-				bossHealth-=100;
+				bossHealth-=50;
 				p3vis =false;
 				ammo+=1;
 			}
@@ -340,14 +333,10 @@ public class BossBattle extends Panel implements ActionListener, KeyListener  {
 			}
 		}
 		if(jetpackuse) {
-			fuel--;
+			fuel-=5;
 		}
-		if(!OnGroundTest()&&!jetpackuse) {
-			if(fuel<=98) {
-				fuel+=2;
-			}else if(fuel==99) {
-				fuel++;
-			}
+		if(!jetpackuse&&fuel<100){
+				fuel+=1;
 		}
 		if(fuel<=0){
 			jetpackuse=false;

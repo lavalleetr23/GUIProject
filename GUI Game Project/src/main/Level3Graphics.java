@@ -67,7 +67,7 @@ public class Level3Graphics extends Panel implements ActionListener, KeyListener
         g.fillRect(290,300,100,40);
         //Mountain Right
         g.fillRect(850,220,400,700);
-        g.fillRect(650,220,160,40);
+        g.fillRect(650,220,300,40);
         g.fillRect(770,240,200,40);
         g.fillRect(790,260,200,40);
         g.fillRect(810,280,200,40);
