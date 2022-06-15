@@ -87,10 +87,10 @@ public class Main {
 		}
 
 	}
-	public static void L1Create() {
+	public void L1Create() {
         Level1.setSize(700,700);
 		Level1.setVisible(true);
-		Start.setVisible(false);
+		PreStory.setVisible(false);
 		Level1Graphics L1 = new Level1Graphics();
 		Level1.add(L1);
 	}
