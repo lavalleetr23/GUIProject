@@ -163,12 +163,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 	public void actionPerformed(ActionEvent e) {
 		//Basically the block moves since as you hold the button it keeps doing this and repainting the Gui
 
-		cloudPuff1X = cloudPuff1X + cloud1Dir;
-		cloudPuff2X = cloudPuff2X + cloud1Dir;
-		cloudPuff3X = cloudPuff3X + cloud1Dir;
-		cloudPuff4X = cloudPuff4X + cloud2Dir;
-		cloudPuff5X = cloudPuff5X + cloud2Dir;
-		cloudPuff6X = cloudPuff6X + cloud2Dir;
+
 
 		if (blockX < 10){
 			blockX = 10;
@@ -176,16 +171,7 @@ public class Level1Graphics extends Panel implements ActionListener, KeyListener
 		if (blockX > 620){
 			blockX = 620;
 		}
-		if (cloudPuff3X == -60){
-			cloudPuff1X= 710;
-			cloudPuff2X = 750;
-			cloudPuff3X = 780;
-		}
-		if (cloudPuff6X == -60){
-			cloudPuff4X= 710;
-			cloudPuff5X = 750;
-			cloudPuff6X = 780;
-		}
+
 		if (blockManCreate().intersects(doorHit) && coinCount == 2){
 			timer.stop();
 			Main cL1 = new Main();
